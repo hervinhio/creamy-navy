@@ -1,0 +1,1 @@
+/home/hervinhio/src/contrib/lemon-green/theme/joyful-brand-theme/AGENTS.md

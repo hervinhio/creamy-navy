@@ -1,0 +1,265 @@
+<rotating-hero class="index-hero full-width">
+  <div class="index-hero__inner">
+    <div class="index-hero__content">
+      <h1 class="index-hero__title">{{ 'home.hero.title' | t }}</h1>
+
+      <nav class="index-hero__actions" aria-label="{{ 'home.hero.navigation' | t | escape }}">
+        <a class="index-hero__primary" href="{{ routes.all_products_collection_url }}">
+          {{ 'home.hero.shop_products' | t }}
+        </a>
+        <a class="index-hero__secondary" href="{{ routes.collections_url }}">
+          {{ 'home.hero.view_featured' | t }}
+        </a>
+      </nav>
+    </div>
+
+    <div class="index-hero__media" aria-live="off">
+      <img
+        class="index-hero__product index-hero__product--airpods is-active"
+        src="{{ 'lemon-green-airpods.png' | asset_url }}"
+        width="559"
+        height="651"
+        alt="{{ 'home.hero.airpods_alt' | t | escape }}"
+        data-rotating-image
+      >
+      <img
+        class="index-hero__product index-hero__product--car"
+        src="{{ 'lemon-green-car.png' | asset_url }}"
+        width="1208"
+        height="507"
+        alt="{{ 'home.hero.car_alt' | t | escape }}"
+        data-rotating-image
+      >
+      <img
+        class="index-hero__product index-hero__product--laptop"
+        src="{{ 'lemon-green-laptop.png' | asset_url }}"
+        width="847"
+        height="610"
+        alt="{{ 'home.hero.laptop_alt' | t | escape }}"
+        data-rotating-image
+      >
+    </div>
+
+    <p class="index-hero__note">{{ 'home.hero.note' | t }}</p>
+  </div>
+</rotating-hero>
+
+{% stylesheet %}
+  .index-hero {
+    display: grid;
+    grid-template-columns: var(--content-grid);
+    min-height: calc(100svh - 5rem);
+    overflow: hidden;
+    background: #ffad00;
+    color: #000;
+  }
+
+  .index-hero__inner {
+    position: relative;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 48% 52%;
+    grid-template-rows: 1fr;
+    width: 100%;
+  }
+
+  .index-hero__content {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    transform: translateY(2.5rem);
+  }
+
+  .index-hero__title {
+    max-width: 19ch;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: 0;
+  }
+
+  .index-hero__media {
+    grid-column: 2;
+    grid-row: 1;
+    place-self: center;
+    position: relative;
+    width: min(45vw, 36rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #ffe58a;
+  }
+
+  .index-hero__product {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: none;
+    object-fit: contain;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 600ms ease;
+  }
+
+  .index-hero__product.is-active {
+    opacity: 1;
+  }
+
+  .index-hero__product--airpods {
+    width: 72%;
+  }
+
+  .index-hero__product--car {
+    width: 132%;
+  }
+
+  .index-hero__product--laptop {
+    width: 118%;
+  }
+
+  .index-hero__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+    width: clamp(14rem, 28.25vw, 22.75rem);
+    margin-top: clamp(3.75rem, 8vh, 5rem);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .index-hero__actions a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .index-hero__primary {
+    min-height: 3rem;
+    display: grid;
+    place-items: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    background: #000;
+    color: #ffad00 !important;
+  }
+
+  .index-hero__secondary {
+    padding: 0.15rem 1rem;
+  }
+
+  .index-hero__note {
+    position: absolute;
+    bottom: clamp(1.5rem, 4vh, 2.5rem);
+    left: 0;
+    max-width: 29rem;
+    padding-left: 0.7rem;
+    font-size: 0.625rem;
+    line-height: 1.3;
+  }
+
+  .index-hero__note::before {
+    content: '*';
+    position: absolute;
+    left: 0;
+  }
+
+  @media (max-width: 47.99rem) {
+    .index-hero {
+      grid-template-columns: var(--content-grid);
+      min-height: max(30.375rem, calc(100svh - 5rem));
+    }
+
+    .index-hero__inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(16rem, 1fr) auto auto;
+      padding: 1.5rem 0 1rem;
+    }
+
+    .index-hero__title {
+      grid-column: 1;
+      grid-row: 1;
+      max-width: 12ch;
+      font-size: 2rem;
+      line-height: 1.15;
+    }
+
+    .index-hero__content {
+      display: contents;
+    }
+
+    .index-hero__media {
+      grid-column: 1;
+      grid-row: 2;
+      width: min(69vw, 17rem);
+      margin-top: 0.4rem;
+    }
+
+    .index-hero__actions {
+      grid-column: 1;
+      grid-row: 3;
+      width: calc(100% - 3rem);
+      margin: 0 auto;
+      gap: 0.65rem;
+      font-size: 0.875rem;
+    }
+
+    .index-hero__primary {
+      min-height: 2.35rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .index-hero__note {
+      position: relative;
+      grid-column: 1;
+      grid-row: 4;
+      bottom: auto;
+      left: auto;
+      max-width: none;
+      margin: 0.85rem 0 0 0.85rem;
+      font-size: 0.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .index-hero__product {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class RotatingHero extends HTMLElement {
+    connectedCallback() {
+      this.images = [...this.querySelectorAll('[data-rotating-image]')]
+      if (this.images.length < 2 || this.interval) return
+
+      this.activeIndex = 0
+      this.interval = window.setInterval(() => {
+        this.images[this.activeIndex].classList.remove('is-active')
+        this.activeIndex = (this.activeIndex + 1) % this.images.length
+        this.images[this.activeIndex].classList.add('is-active')
+      }, 10000)
+    }
+
+    disconnectedCallback() {
+      window.clearInterval(this.interval)
+      this.interval = undefined
+    }
+  }
+
+  if (!customElements.get('rotating-hero')) {
+    customElements.define('rotating-hero', RotatingHero)
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:general.homepage_hero",
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:general.homepage_hero"
+    }
+  ]
+}
+{% endschema %}

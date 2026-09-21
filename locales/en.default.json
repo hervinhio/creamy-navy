@@ -28,7 +28,8 @@
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Collections",
+    "available_products": "Available products"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",
@@ -42,7 +43,6 @@
       "title": "The store that thinks like a store",
       "navigation": "Store navigation",
       "shop_products": "Shop products",
-      "view_featured": "View featured items",
       "note": "Les produits non dédouannés sont revendus par la douane après le délai d'entreposage",
       "airpods_alt": "Orange over-ear headphones",
       "car_alt": "Silver sports car",

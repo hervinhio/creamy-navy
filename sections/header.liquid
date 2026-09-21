@@ -1,6 +1,14 @@
 <header>
   <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
+    <a href="{{ routes.root_url }}" aria-label="Lokos">
+      <img
+        class="header__logo"
+        src="{{ 'lemon-green-logo-light.png' | asset_url }}"
+        width="716"
+        height="282"
+        alt="Lokos"
+      >
+    </a>
   </h2>
 
   <div class="header__menu">
@@ -49,6 +57,10 @@
   }
   header svg {
     width: 2rem;
+  }
+  header .header__logo {
+    width: 7rem;
+    height: auto;
   }
   header .header__menu,
   header .header__icons {

@@ -1,7 +1,9 @@
 <rotating-hero class="index-hero full-width">
   <div class="index-hero__inner">
     <div class="index-hero__content">
-      <h1 class="index-hero__title">{{ 'home.hero.title' | t }}</h1>
+      <h1 class="poltawski-nowy-h1 index-hero__title">
+        {{- 'home.hero.title' | t -}}<sup aria-hidden="true">*</sup>
+      </h1>
 
       <nav class="index-hero__actions" aria-label="{{ 'home.hero.navigation' | t | escape }}">
         <a class="index-hero__primary" href="{{ routes.all_products_collection_url }}">
@@ -72,10 +74,17 @@
 
   .index-hero__title {
     max-width: 19ch;
-    font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 700;
     line-height: 1.14;
     letter-spacing: 0;
+  }
+
+  .index-hero__title sup {
+    position: relative;
+    top: -0.35em;
+    font-size: 0.35em;
+    line-height: 0;
+    vertical-align: baseline;
   }
 
   .index-hero__media {

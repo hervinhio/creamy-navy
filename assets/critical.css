@@ -115,3 +115,11 @@ body {
 .shopify-section > .full-width {
   grid-column: 1 / -1;
 }
+
+.poltawski-nowy-h1 {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}

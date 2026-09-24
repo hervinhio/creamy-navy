@@ -108,13 +108,17 @@
         {% capture category_translation_key %}home.storefront.discovery.categories.{{ category_handle | replace: '-', '_' }}{% endcapture %}
         {% case category_handle %}
           {% when 'sacs' %}
-            {% assign category_icon = 'backpack' %}
+            {% assign category_fallback_asset = 'category-backpacks.jpg' %}
           {% when 'cahiers' %}
-            {% assign category_icon = 'book_ribbon' %}
+            {% assign category_fallback_asset = 'category-notebooks.jpg' %}
           {% when 'livres' %}
-            {% assign category_icon = 'book_2' %}
-          {% else %}
-            {% assign category_icon = 'architecture' %}
+            {% assign category_fallback_asset = 'category-books.jpg' %}
+          {% when 'ecriture' %}
+            {% assign category_fallback_asset = 'category-writing.jpg' %}
+          {% when 'arts-plastiques' %}
+            {% assign category_fallback_asset = 'category-art-supplies.jpg' %}
+          {% when 'fournitures' %}
+            {% assign category_fallback_asset = 'category-school-supplies.jpg' %}
         {% endcase %}
 
         <a class="home-category" href="{{ category.url | default: routes.collections_url | append: '/' | append: category_handle }}">
@@ -127,10 +131,17 @@
                   class: 'home-category__image',
                   widths: '240, 360, 480, 640',
                   sizes: '(max-width: 639px) 44vw, (max-width: 1023px) 29vw, 15vw',
-                  loading: 'lazy'
+                  loading: 'eager'
               }}
             {% else %}
-              <span class="material-symbols-outlined" aria-hidden="true">{{ category_icon }}</span>
+              <img
+                class="home-category__image"
+                src="{{ category_fallback_asset | asset_url }}"
+                alt="{{ category_translation_key | t | escape }}"
+                width="900"
+                height="720"
+                loading="eager"
+              >
             {% endif %}
           </span>
           <strong>{{ category_translation_key | t }}</strong>
@@ -788,44 +799,66 @@
   .home-categories {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: clamp(0.65rem, 1.5vw, 1.25rem);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
     max-width: 90rem;
     margin: 0 auto;
+    padding: 1rem 0.75rem 2rem;
   }
 
   .home-category {
+    --note-rotation: -5deg;
+
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-width: 0;
-    border-radius: 0.4rem;
-    background: #ffffff;
-    box-shadow: 0 0.7rem 2rem rgb(68 68 68 / 9%);
+    border-radius: 0.12rem;
+    background: #f2d976;
+    box-shadow:
+      0 1px 1px rgb(68 68 68 / 18%),
+      0 5px 5px -3px rgb(68 68 68 / 28%),
+      0 18px 16px -12px rgb(68 68 68 / 48%);
     color: inherit;
     text-decoration: none;
+    transform: rotate(var(--note-rotation));
+    transform-origin: 50% 12%;
     transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .home-category:nth-child(2) {
+    --note-rotation: 3deg;
+    background: #f5df89;
+  }
+
+  .home-category:nth-child(3) {
+    --note-rotation: -2deg;
+    background: #ecd16d;
+  }
+
+  .home-category:nth-child(4) {
+    --note-rotation: 6deg;
+    background: #f6e294;
+  }
+
+  .home-category:nth-child(5) {
+    --note-rotation: -7deg;
+    background: #efd77f;
+  }
+
+  .home-category:nth-child(6) {
+    --note-rotation: 1.5deg;
+    background: #f3dc83;
   }
 
   .home-category__media {
     display: grid;
     place-items: center;
-    width: 100%;
+    width: calc(100% - 1.4rem);
     aspect-ratio: 1 / 0.9;
+    margin: 0.7rem 0.7rem 0;
     overflow: hidden;
-    background: #ddc173;
-  }
-
-  .home-category:nth-child(2n) .home-category__media {
-    background: var(--palette-matted-old-blue);
-  }
-
-  .home-category:nth-child(3n) .home-category__media {
-    background: var(--palette-matted-old-crimson);
-  }
-
-  .home-category__media > .material-symbols-outlined {
-    color: var(--palette-matted-old-cream);
-    font-size: clamp(2.5rem, 5vw, 5rem);
+    background: rgb(255 255 255 / 35%);
+    box-shadow: inset 0 0 0 1px rgb(68 68 68 / 8%);
   }
 
   .home-category__image {
@@ -1073,8 +1106,11 @@
   @media (hover: hover) {
     .home-category:hover,
     .home-category:focus-visible {
-      transform: translateY(-0.35rem);
-      box-shadow: 0 1.1rem 2.4rem rgb(68 68 68 / 16%);
+      transform: translateY(-0.45rem) rotate(var(--note-rotation));
+      box-shadow:
+        0 2px 2px rgb(68 68 68 / 16%),
+        0 9px 8px -5px rgb(68 68 68 / 24%),
+        0 25px 24px -14px rgb(68 68 68 / 46%);
     }
   }
 

@@ -1,266 +1,354 @@
-<rotating-hero class="index-hero full-width">
-  <div class="index-hero__inner">
-    <div class="index-hero__content">
-      <h1 class="poltawski-nowy-h1 index-hero__title">
-        {{- 'home.hero.title' | t -}}<sup aria-hidden="true">*</sup>
-      </h1>
+<back-to-school-countdown
+  class="back-to-school full-width"
+  data-deadline="{{ section.settings.deadline | escape }}"
+>
+  <nav class="back-to-school__rail" aria-label="{{ 'home.back_to_school.navigation' | t | escape }}">
+    <a
+      class="back-to-school__rail-link is-active"
+      href="{{ routes.root_url }}"
+      aria-label="{{ 'home.back_to_school.categories.news' | t | escape }}"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">home</span>
+      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.news' | t }}</span>
+    </a>
+    <a
+      class="back-to-school__rail-link"
+      href="{{ routes.collections_url | append: '/cahiers' }}"
+      aria-label="{{ 'home.back_to_school.categories.notebooks' | t | escape }}"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">book_ribbon</span>
+      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.notebooks' | t }}</span>
+    </a>
+    <a
+      class="back-to-school__rail-link"
+      href="{{ routes.collections_url | append: '/sacs' }}"
+      aria-label="{{ 'home.back_to_school.categories.bags' | t | escape }}"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">backpack</span>
+      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.bags' | t }}</span>
+    </a>
+    <a
+      class="back-to-school__rail-link"
+      href="{{ routes.collections_url | append: '/livres' }}"
+      aria-label="{{ 'home.back_to_school.categories.books' | t | escape }}"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">book_2</span>
+      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.books' | t }}</span>
+    </a>
+    <a
+      class="back-to-school__rail-link"
+      href="{{ routes.collections_url | append: '/utilitaires' }}"
+      aria-label="{{ 'home.back_to_school.categories.supplies' | t | escape }}"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">architecture</span>
+      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.supplies' | t }}</span>
+    </a>
+  </nav>
 
-      <nav class="index-hero__actions" aria-label="{{ 'home.hero.navigation' | t | escape }}">
-        <a class="index-hero__primary" href="{{ routes.all_products_collection_url }}">
-          {{ 'home.hero.shop_products' | t }}
-        </a>
-      </nav>
+  <div
+    class="back-to-school__content"
+    style="--school-doodles: url('{{ 'school-doodles.svg' | asset_url }}')"
+  >
+    <div class="back-to-school__message">
+      <h1 class="back-to-school__title">{{ 'home.back_to_school.title' | t }}</h1>
+      <p class="back-to-school__description">{{ 'home.back_to_school.description' | t }}</p>
     </div>
 
-    <div class="index-hero__media" aria-live="off">
-      <img
-        class="index-hero__product index-hero__product--airpods is-active"
-        src="{{ 'lemon-green-airpods.png' | asset_url }}"
-        width="559"
-        height="651"
-        alt="{{ 'home.hero.airpods_alt' | t | escape }}"
-        data-rotating-image
-      >
-      <img
-        class="index-hero__product index-hero__product--car"
-        src="{{ 'lemon-green-car.png' | asset_url }}"
-        width="1208"
-        height="507"
-        alt="{{ 'home.hero.car_alt' | t | escape }}"
-        data-rotating-image
-      >
-      <img
-        class="index-hero__product index-hero__product--laptop"
-        src="{{ 'lemon-green-laptop.png' | asset_url }}"
-        width="847"
-        height="610"
-        alt="{{ 'home.hero.laptop_alt' | t | escape }}"
-        data-rotating-image
-      >
+    <div class="back-to-school__countdown" aria-label="{{ 'home.back_to_school.countdown' | t | escape }}">
+      <div class="back-to-school__time">
+        <strong data-countdown-days>250</strong>
+        <span>{{ 'home.back_to_school.days' | t }}</span>
+      </div>
+      <div class="back-to-school__time">
+        <strong data-countdown-hours>23</strong>
+        <span>{{ 'home.back_to_school.hours' | t }}</span>
+      </div>
+      <div class="back-to-school__time">
+        <strong data-countdown-minutes>14</strong>
+        <span>{{ 'home.back_to_school.minutes' | t }}</span>
+      </div>
     </div>
-
-    <p class="index-hero__note">{{ 'home.hero.note' | t }}</p>
   </div>
-</rotating-hero>
+</back-to-school-countdown>
 
 {% stylesheet %}
-  .index-hero {
+  .back-to-school {
     display: grid;
-    grid-template-columns: var(--content-grid);
+    grid-template-columns: 3rem minmax(0, 1fr);
     min-height: calc(100svh - 5rem);
     overflow: hidden;
-    background: #ffad00;
-    color: #000;
+    background: var(--palette-matted-old-cream);
+    color: var(--palette-matted-old-charcoal);
+    font-family: 'Poppins', sans-serif;
   }
 
-  .index-hero__inner {
-    position: relative;
-    grid-column: 2;
-    display: grid;
-    grid-template-columns: 48% 52%;
-    grid-template-rows: 1fr;
-    width: 100%;
-  }
-
-  .index-hero__content {
+  .back-to-school__rail {
     grid-column: 1;
-    grid-row: 1;
-    align-self: center;
-    transform: translateY(2.5rem);
+    align-self: end;
+    display: grid;
+    grid-template-rows: repeat(5, minmax(5rem, 1fr));
+    width: 100%;
+    height: 78svh;
   }
 
-  .index-hero__title {
-    max-width: 19ch;
-    font-weight: 700;
-    line-height: 1.14;
-    letter-spacing: 0;
-  }
-
-  .index-hero__title sup {
+  .back-to-school__rail-link {
     position: relative;
-    top: -0.35em;
-    font-size: 0.35em;
-    line-height: 0;
-    vertical-align: baseline;
-  }
-
-  .index-hero__media {
-    grid-column: 2;
-    grid-row: 1;
-    place-self: center;
-    position: relative;
-    width: min(45vw, 36rem);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: #ffe58a;
-  }
-
-  .index-hero__product {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    max-width: none;
-    object-fit: contain;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    transition: opacity 600ms ease;
-  }
-
-  .index-hero__product.is-active {
-    opacity: 1;
-  }
-
-  .index-hero__product--airpods {
-    width: 72%;
-  }
-
-  .index-hero__product--car {
-    width: 132%;
-  }
-
-  .index-hero__product--laptop {
-    width: 118%;
-  }
-
-  .index-hero__actions {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
-    width: clamp(14rem, 28.25vw, 22.75rem);
-    margin-top: clamp(3.75rem, 8vh, 5rem);
-    font-size: 1rem;
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .index-hero__actions a {
-    color: inherit;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 0;
+    box-shadow:
+      0 0.2rem 0.4rem -0.1rem color-mix(in srgb, var(--palette-matted-old-charcoal) 30%, transparent),
+      inset -0.55rem 0 0.8rem -0.4rem color-mix(in srgb, var(--palette-matted-old-charcoal) 55%, transparent);
+    color: var(--palette-matted-old-cream);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1;
     text-decoration: none;
   }
 
-  .index-hero__primary {
-    min-height: 3rem;
+  .back-to-school__rail-link .material-symbols-outlined {
+    font-size: 1.65rem;
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+
+  .back-to-school__rail-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .back-to-school__rail-link:nth-child(1) {
+    z-index: 5;
+    border-radius: 0 1rem 0 0;
+    background: var(--palette-matted-old-crimson);
+  }
+
+  .back-to-school__rail-link:nth-child(2) {
+    z-index: 4;
+    background: var(--palette-matted-old-blue);
+  }
+
+  .back-to-school__rail-link:nth-child(3) {
+    z-index: 3;
+    background: var(--palette-matted-old-cream);
+    color: var(--palette-matted-old-charcoal);
+  }
+
+  .back-to-school__rail-link:nth-child(4) {
+    z-index: 2;
+    background: var(--palette-matted-old-gray);
+    color: var(--palette-matted-old-charcoal);
+  }
+
+  .back-to-school__rail-link:nth-child(5) {
+    z-index: 1;
+    box-shadow: inset -0.55rem 0 0.8rem -0.4rem color-mix(in srgb, var(--palette-matted-old-charcoal) 55%, transparent);
+    background: var(--palette-matted-old-charcoal);
+  }
+
+  .back-to-school__rail-link:focus-visible {
+    outline: 3px solid var(--palette-matted-old-cream);
+    outline-offset: -5px;
+  }
+
+  .back-to-school__content {
+    position: relative;
+    isolation: isolate;
+    grid-column: 2;
+    min-width: 0;
+    min-height: calc(100svh - 5rem);
+    overflow: hidden;
+  }
+
+  .back-to-school__content::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 68%;
+    right: 0;
+    bottom: 0;
+    left: 52%;
+    background-color: var(--palette-matted-old-gray);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    mask-image: var(--school-doodles);
+    mask-position: right bottom;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+
+  .back-to-school__message {
+    position: absolute;
+    z-index: 1;
+    top: 51.5%;
+    left: calc(50% + 0.75rem);
+    width: min(28rem, calc(100% - 3rem));
+    transform: translate(-50%, -50%);
+  }
+
+  .back-to-school__title {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: clamp(6rem, 11.75vw, 8.5rem);
+    font-weight: 400;
+    line-height: 0.7;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .back-to-school__description {
+    margin-top: 1.15rem;
+    font-family: 'Poltawski Nowy', serif;
+    font-size: 1.06rem;
+    line-height: 1.05;
+  }
+
+  .back-to-school__countdown {
+    position: absolute;
+    z-index: 1;
+    bottom: 8.2svh;
+    left: calc(50% - 1.5rem);
+    display: flex;
+    gap: 0.65rem;
+    transform: translateX(-50%);
+  }
+
+  .back-to-school__time {
     display: grid;
-    place-items: center;
-    padding: 0.75rem 1.25rem;
-    border-radius: 4px;
-    background: #000;
-    color: #ffad00 !important;
+    place-content: center;
+    width: 4.65rem;
+    aspect-ratio: 1.15;
+    border-radius: 0.4rem;
+    background: var(--palette-matted-old-gray);
+    text-align: center;
   }
 
-  .index-hero__note {
-    position: absolute;
-    bottom: clamp(1.5rem, 4vh, 2.5rem);
-    left: 0;
-    max-width: 29rem;
-    padding-left: 0.7rem;
-    font-size: 0.625rem;
-    line-height: 1.3;
+  .back-to-school__time strong {
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1;
   }
 
-  .index-hero__note::before {
-    content: '*';
-    position: absolute;
-    left: 0;
+  .back-to-school__time span {
+    margin-top: 0.3rem;
+    font-family: 'Poltawski Nowy', serif;
+    font-size: 0.7rem;
+    line-height: 1;
   }
 
-  @media (max-width: 47.99rem) {
-    .index-hero {
-      grid-template-columns: var(--content-grid);
-      min-height: max(30.375rem, calc(100svh - 5rem));
+  @media (max-width: 40rem) {
+    .back-to-school {
+      grid-template-columns: 2.65rem minmax(0, 1fr);
     }
 
-    .index-hero__inner {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto minmax(16rem, 1fr) auto auto;
-      padding: 1.5rem 0 1rem;
+    .back-to-school__rail {
+      height: 82svh;
     }
 
-    .index-hero__title {
-      grid-column: 1;
-      grid-row: 1;
-      max-width: 12ch;
-      font-size: 2rem;
-      line-height: 1.15;
+    .back-to-school__rail-link {
+      font-size: 0.9rem;
     }
 
-    .index-hero__content {
-      display: contents;
+    .back-to-school__rail-label {
+      display: none;
     }
 
-    .index-hero__media {
-      grid-column: 1;
-      grid-row: 2;
-      width: min(69vw, 17rem);
-      margin-top: 0.4rem;
+    .back-to-school__content::before {
+      top: 54%;
+      left: 28%;
     }
 
-    .index-hero__actions {
-      grid-column: 1;
-      grid-row: 3;
-      width: calc(100% - 3rem);
-      margin: 0 auto;
-      gap: 0.65rem;
-      font-size: 0.875rem;
+    .back-to-school__message {
+      top: 43%;
+      left: 50%;
+      width: min(21rem, calc(100% - 2rem));
     }
 
-    .index-hero__primary {
-      min-height: 2.35rem;
-      padding: 0.5rem 1rem;
+    .back-to-school__title {
+      font-size: clamp(2.75rem, 19vw, 5.5rem);
+      white-space: nowrap;
     }
 
-    .index-hero__note {
-      position: relative;
-      grid-column: 1;
-      grid-row: 4;
-      bottom: auto;
-      left: auto;
-      max-width: none;
-      margin: 0.85rem 0 0 0.85rem;
-      font-size: 0.5rem;
+    .back-to-school__description {
+      margin-top: 0.9rem;
+      font-size: 0.9rem;
+      line-height: 1.12;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .index-hero__product {
-      transition: none;
+    .back-to-school__countdown {
+      bottom: 7svh;
+      left: calc(50% - 1.325rem);
+      gap: 0.4rem;
+    }
+
+    .back-to-school__time {
+      width: min(4rem, 20vw);
+    }
+
+    .back-to-school__time strong {
+      font-size: 1.4rem;
     }
   }
 {% endstylesheet %}
 
 {% javascript %}
-  class RotatingHero extends HTMLElement {
+  class BackToSchoolCountdown extends HTMLElement {
     connectedCallback() {
-      this.images = [...this.querySelectorAll('[data-rotating-image]')]
-      if (this.images.length < 2 || this.interval) return
+      this.deadline = new Date(this.dataset.deadline).getTime()
+      this.days = this.querySelector('[data-countdown-days]')
+      this.hours = this.querySelector('[data-countdown-hours]')
+      this.minutes = this.querySelector('[data-countdown-minutes]')
 
-      this.activeIndex = 0
-      this.interval = window.setInterval(() => {
-        this.images[this.activeIndex].classList.remove('is-active')
-        this.activeIndex = (this.activeIndex + 1) % this.images.length
-        this.images[this.activeIndex].classList.add('is-active')
-      }, 10000)
+      if (Number.isNaN(this.deadline)) return
+
+      this.update()
+      this.interval = window.setInterval(() => this.update(), 60000)
     }
 
     disconnectedCallback() {
       window.clearInterval(this.interval)
-      this.interval = undefined
+    }
+
+    update() {
+      const remaining = Math.max(0, this.deadline - Date.now())
+      const totalMinutes = Math.floor(remaining / 60000)
+
+      this.days.textContent = Math.floor(totalMinutes / 1440)
+      this.hours.textContent = Math.floor((totalMinutes % 1440) / 60)
+      this.minutes.textContent = totalMinutes % 60
+
+      if (remaining === 0) window.clearInterval(this.interval)
     }
   }
 
-  if (!customElements.get('rotating-hero')) {
-    customElements.define('rotating-hero', RotatingHero)
+  if (!customElements.get('back-to-school-countdown')) {
+    customElements.define('back-to-school-countdown', BackToSchoolCountdown)
   }
 {% endjavascript %}
 
 {% schema %}
 {
-  "name": "t:general.homepage_hero",
-  "settings": [],
+  "name": "t:general.back_to_school",
+  "settings": [
+    {
+      "type": "text",
+      "id": "deadline",
+      "label": "t:labels.countdown_deadline",
+      "info": "t:info.countdown_deadline",
+      "default": "2027-06-02T00:00:00+02:00"
+    }
+  ],
   "presets": [
     {
-      "name": "t:general.homepage_hero"
+      "name": "t:general.back_to_school"
     }
   ]
 }

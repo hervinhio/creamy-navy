@@ -4,6 +4,7 @@
     "article": "Article",
     "block": "Block",
     "blog": "Blog",
+    "back_to_school": "Back to school",
     "cart": "Cart",
     "collection": "Collection",
     "collections": "Collections",
@@ -44,12 +45,18 @@
     "layout_direction": "Layout direction",
     "menu": "Menu",
     "customer_account_menu": "Customer account menu",
+    "countdown_deadline": "Countdown deadline",
+    "primary_menu": "Primary menu",
+    "secondary_menu": "Secondary menu",
     "padding": "Padding",
     "page_margin": "Page margin",
     "page_width": "Page width",
     "show_payment_icons": "Show payment icons",
     "text_style": "Text style",
     "text": "Text"
+  },
+  "info": {
+    "countdown_deadline": "Use an ISO 8601 date and time, including the time zone."
   },
   "options": {
     "alignment": {

@@ -27,6 +27,20 @@
       "title": "Login"
     }
   },
+  "footer": {
+    "primary_navigation": "Shop navigation",
+    "secondary_navigation": "Customer information",
+    "products": "Products",
+    "about": "About",
+    "blog": "Blog",
+    "shipping": "Shipping",
+    "returns": "Returns",
+    "contact": "Contact",
+    "newsletter_title": "Sign up to our newsletter",
+    "email": "Email address",
+    "email_placeholder": "email@example.com",
+    "newsletter_success": "Thanks for signing up."
+  },
   "collections": {
     "title": "Collections",
     "available_products": "Available products"
@@ -39,6 +53,22 @@
     "use_at_checkout": "Use this gift card at checkout"
   },
   "home": {
+    "back_to_school": {
+      "title": "Rentrée",
+      "description": "Toutes vos fournitures scolaire en un seul endroit. En quelques cliques, depuis le confort de chez vous, offrez à votre enfant un souvenir, une marque d'affection, une rentrée scolaire et une année épanouie.",
+      "navigation": "Catégories de la boutique",
+      "countdown": "Compte à rebours jusqu'à la rentrée",
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes",
+      "categories": {
+        "news": "Accueil",
+        "notebooks": "Cahiers",
+        "bags": "Sacs",
+        "books": "Livres",
+        "supplies": "Utilitaires"
+      }
+    },
     "hero": {
       "title": "The store that thinks like a store",
       "navigation": "Store navigation",

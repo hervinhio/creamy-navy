@@ -1,12 +1,12 @@
 <header>
   <h2 class="header__title">
-    <a href="{{ routes.root_url }}" aria-label="Lokos">
+    <a href="{{ routes.root_url }}" aria-label="Ma rentrée">
       <img
         class="header__logo"
-        src="{{ 'lemon-green-logo-light.png' | asset_url }}"
-        width="716"
-        height="282"
-        alt="Lokos"
+        src="{{ 'ma-rentree-logo.png' | asset_url }}"
+        width="472"
+        height="304"
+        alt="Ma rentrée"
       >
     </a>
   </h2>
@@ -40,11 +40,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: var(--palette-matted-old-cream);
+    color: var(--palette-matted-old-charcoal);
   }
   header a {
     position: relative;
     text-decoration: none;
-    color: var(--color-foreground);
+    color: var(--palette-matted-old-charcoal);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,6 +59,7 @@
   }
   header svg {
     width: 2rem;
+    color: var(--palette-matted-old-charcoal);
   }
   header .header__logo {
     width: 7rem;

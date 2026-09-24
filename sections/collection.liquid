@@ -65,8 +65,11 @@
   }
 
   .collection-product {
+    position: relative;
     min-width: 0;
     text-align: center;
+    transform-origin: center;
+    transition: transform 240ms ease;
   }
 
   .collection-product__media {
@@ -77,6 +80,7 @@
     overflow: hidden;
     border-radius: 50%;
     background: #ffe58a;
+    transition: box-shadow 240ms ease;
   }
 
   .collection-product__image {
@@ -115,6 +119,19 @@
     color: inherit;
   }
 
+  @media (hover: hover) {
+    .collection-product:hover,
+    .collection-product:focus-within {
+      z-index: 1;
+      transform: translateY(-0.5rem) scale(1.04);
+    }
+
+    .collection-product:hover .collection-product__media,
+    .collection-product:focus-within .collection-product__media {
+      box-shadow: 0 1.25rem 2rem rgb(0 0 0 / 18%);
+    }
+  }
+
   @media (max-width: 47.99rem) {
     .collection-page {
       padding-top: 2rem;
@@ -129,6 +146,13 @@
     .collection-product__content h2,
     .collection-product__price {
       font-size: 0.875rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .collection-product,
+    .collection-product__media {
+      transition: none;
     }
   }
 {% endstylesheet %}

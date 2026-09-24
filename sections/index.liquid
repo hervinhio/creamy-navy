@@ -5,6 +5,7 @@
   <div
     class="back-to-school__content"
     style="
+      --school-doodles: url('{{ 'school-doodles-reference.svg' | asset_url }}');
       --wavy-background-horizontal: url('{{ 'wavy-background-horizontal.svg' | asset_url }}');
       --wavy-background-vertical: url('{{ 'wavy-background-vertical.svg' | asset_url }}');
     "
@@ -108,17 +109,17 @@
         {% capture category_translation_key %}home.storefront.discovery.categories.{{ category_handle | replace: '-', '_' }}{% endcapture %}
         {% case category_handle %}
           {% when 'sacs' %}
-            {% assign category_fallback_asset = 'category-backpacks.jpg' %}
+            {% assign category_photo_asset = 'category-backpacks.jpg' %}
           {% when 'cahiers' %}
-            {% assign category_fallback_asset = 'category-notebooks.jpg' %}
+            {% assign category_photo_asset = 'category-notebooks.jpg' %}
           {% when 'livres' %}
-            {% assign category_fallback_asset = 'category-books.jpg' %}
+            {% assign category_photo_asset = 'category-books.jpg' %}
           {% when 'ecriture' %}
-            {% assign category_fallback_asset = 'category-writing.jpg' %}
+            {% assign category_photo_asset = 'category-writing.jpg' %}
           {% when 'arts-plastiques' %}
-            {% assign category_fallback_asset = 'category-art-supplies.jpg' %}
+            {% assign category_photo_asset = 'category-art-supplies.jpg' %}
           {% when 'fournitures' %}
-            {% assign category_fallback_asset = 'category-school-supplies.jpg' %}
+            {% assign category_photo_asset = 'category-school-supplies.jpg' %}
         {% endcase %}
 
         <a class="home-category" href="{{ category.url | default: routes.collections_url | append: '/' | append: category_handle }}">
@@ -136,7 +137,7 @@
             {% else %}
               <img
                 class="home-category__image"
-                src="{{ category_fallback_asset | asset_url }}"
+                src="{{ category_photo_asset | asset_url }}"
                 alt="{{ category_translation_key | t | escape }}"
                 width="900"
                 height="720"
@@ -307,16 +308,16 @@
     min-height: calc(100svh - 5rem);
     overflow: hidden;
     background-color: var(--palette-matted-old-cream);
-    background-image: var(--wavy-background-vertical);
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: 53% 100%;
+    background-image: var(--wavy-background-vertical), var(--school-doodles);
+    background-position: right center, 62% center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 53% 100%, auto 92%;
     font-family: 'Autour One', cursive;
   }
 
   @media (min-width: 90rem) {
     .back-to-school__content {
-      background-size: 47% 100%;
+      background-size: 47% 100%, auto 92%;
     }
   }
 
@@ -612,7 +613,7 @@
       min-height: max(calc(100svh - 5rem), 44rem);
       background-image: var(--wavy-background-horizontal);
       background-position: center bottom;
-      background-size: 100% 56%;
+      background-size: 100% 48%;
     }
 
     .back-to-school__message {
@@ -650,11 +651,11 @@
     }
 
     .back-to-school__services {
-      top: 76%;
+      top: 79%;
       right: auto;
       left: 50%;
       width: min(30rem, calc(100% - 2rem));
-      height: 44%;
+      height: 38%;
       gap: 1.25rem;
       transform: translate(-50%, -50%);
     }
@@ -664,7 +665,7 @@
     }
 
     .back-to-school__service-title {
-      font-size: 1.35rem;
+      font-size: 1.6rem;
     }
 
     .back-to-school__service:nth-child(2),
@@ -813,7 +814,7 @@
     flex-direction: column;
     min-width: 0;
     border-radius: 0.12rem;
-    background: #f2d976;
+    background: #ddc173;
     box-shadow:
       0 1px 1px rgb(68 68 68 / 18%),
       0 5px 5px -3px rgb(68 68 68 / 28%),
@@ -827,27 +828,22 @@
 
   .home-category:nth-child(2) {
     --note-rotation: 3deg;
-    background: #f5df89;
   }
 
   .home-category:nth-child(3) {
     --note-rotation: -2deg;
-    background: #ecd16d;
   }
 
   .home-category:nth-child(4) {
     --note-rotation: 6deg;
-    background: #f6e294;
   }
 
   .home-category:nth-child(5) {
     --note-rotation: -7deg;
-    background: #efd77f;
   }
 
   .home-category:nth-child(6) {
     --note-rotation: 1.5deg;
-    background: #f3dc83;
   }
 
   .home-category__media {
@@ -857,8 +853,6 @@
     aspect-ratio: 1 / 0.9;
     margin: 0.7rem 0.7rem 0;
     overflow: hidden;
-    background: rgb(255 255 255 / 35%);
-    box-shadow: inset 0 0 0 1px rgb(68 68 68 / 8%);
   }
 
   .home-category__image {
@@ -1026,7 +1020,7 @@
   .home-credibility__groups h3 {
     display: block;
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: 1.15rem;
     line-height: 1.35;
   }
 

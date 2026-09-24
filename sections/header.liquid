@@ -1,8 +1,7 @@
 <header>
   <h2 class="header__title">
     <a class="header__brand" href="{{ routes.root_url }}" aria-label="{{ 'header.brand_name' | t | escape }}">
-      <strong>{{ 'header.brand_name' | t }}</strong>
-      <span>{{ 'header.campaign_name' | t }}</span>
+      {% render 'brand-wordmark' %}
     </a>
   </h2>
 
@@ -72,24 +71,8 @@
     color: var(--palette-matted-old-charcoal);
   }
   header .header__brand {
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1;
-  }
-
-  header .header__brand strong {
-    color: var(--palette-matted-old-blue);
-    font-family: 'Autour One', cursive;
-    font-size: 1.15rem;
-    letter-spacing: 0;
-  }
-
-  header .header__brand span {
-    margin-top: 0.25rem;
-    color: var(--palette-matted-old-crimson);
-    font-family: 'Reenie Beanie', cursive;
-    font-size: 1rem;
-    font-weight: 400;
+    justify-content: flex-start;
+    font-size: 3rem;
   }
   header .header__menu,
   header .header__icons {

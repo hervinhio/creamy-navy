@@ -2,7 +2,7 @@
   <div class="footer__inner">
     <div class="footer__brand">
       <a class="footer__logo-link" href="{{ routes.root_url }}" aria-label="{{ 'header.brand_name' | t | escape }}">
-        {{ 'header.brand_name' | t }}
+        {% render 'brand-wordmark', variant: 'light' %}
       </a>
       <p class="footer__tagline">{{ 'footer.tagline' | t }}</p>
       <p class="footer__copyright">
@@ -103,12 +103,9 @@
   }
 
   .footer__logo-link {
-    display: block;
+    display: flex;
     width: fit-content;
-    color: #ddc173;
-    font-family: 'Autour One', cursive;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 3.5rem;
   }
 
   .footer__tagline,

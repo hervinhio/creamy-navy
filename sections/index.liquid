@@ -2,49 +2,6 @@
   class="back-to-school full-width"
   data-deadline="{{ section.settings.deadline | escape }}"
 >
-  <nav class="back-to-school__rail" aria-label="{{ 'home.back_to_school.navigation' | t | escape }}">
-    <a
-      class="back-to-school__rail-link is-active"
-      href="{{ routes.root_url }}"
-      aria-label="{{ 'home.back_to_school.categories.news' | t | escape }}"
-    >
-      <span class="material-symbols-outlined" aria-hidden="true">home</span>
-      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.news' | t }}</span>
-    </a>
-    <a
-      class="back-to-school__rail-link"
-      href="{{ routes.collections_url | append: '/cahiers' }}"
-      aria-label="{{ 'home.back_to_school.categories.notebooks' | t | escape }}"
-    >
-      <span class="material-symbols-outlined" aria-hidden="true">book_ribbon</span>
-      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.notebooks' | t }}</span>
-    </a>
-    <a
-      class="back-to-school__rail-link"
-      href="{{ routes.collections_url | append: '/sacs' }}"
-      aria-label="{{ 'home.back_to_school.categories.bags' | t | escape }}"
-    >
-      <span class="material-symbols-outlined" aria-hidden="true">backpack</span>
-      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.bags' | t }}</span>
-    </a>
-    <a
-      class="back-to-school__rail-link"
-      href="{{ routes.collections_url | append: '/livres' }}"
-      aria-label="{{ 'home.back_to_school.categories.books' | t | escape }}"
-    >
-      <span class="material-symbols-outlined" aria-hidden="true">book_2</span>
-      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.books' | t }}</span>
-    </a>
-    <a
-      class="back-to-school__rail-link"
-      href="{{ routes.collections_url | append: '/utilitaires' }}"
-      aria-label="{{ 'home.back_to_school.categories.supplies' | t | escape }}"
-    >
-      <span class="material-symbols-outlined" aria-hidden="true">architecture</span>
-      <span class="back-to-school__rail-label">{{ 'home.back_to_school.categories.supplies' | t }}</span>
-    </a>
-  </nav>
-
   <div
     class="back-to-school__content"
     style="
@@ -55,8 +12,7 @@
     <div class="back-to-school__message">
       <p class="back-to-school__eyebrow">{{ 'home.back_to_school.eyebrow' | t }}</p>
       <h1 class="back-to-school__title">
-        <span class="back-to-school__title-prefix">{{ 'home.back_to_school.title_prefix' | t }}</span>
-        <span>{{ 'home.back_to_school.title' | t }}</span>
+        {% render 'brand-wordmark' %}
       </h1>
       <p class="back-to-school__description">{{ 'home.back_to_school.description' | t }}</p>
       <a class="back-to-school__primary-action" href="{{ routes.all_products_collection_url }}">
@@ -323,8 +279,7 @@
 
 {% stylesheet %}
   .back-to-school {
-    display: grid;
-    grid-template-columns: 3rem minmax(0, 1fr);
+    display: block;
     min-height: calc(100svh - 5rem);
     overflow: hidden;
     background: var(--palette-matted-old-cream);
@@ -332,89 +287,11 @@
     font-family: 'Autour One', cursive;
   }
 
-  .back-to-school__rail {
-    grid-column: 1;
-    align-self: end;
-    display: grid;
-    grid-template-rows: repeat(5, minmax(5rem, 1fr));
-    width: 100%;
-    height: 78svh;
-  }
-
-  .back-to-school__rail-link {
-    position: relative;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    min-height: 0;
-    box-shadow:
-      0 0.2rem 0.4rem -0.1rem color-mix(in srgb, var(--palette-matted-old-charcoal) 30%, transparent),
-      inset -0.55rem 0 0.8rem -0.4rem color-mix(in srgb, var(--palette-matted-old-charcoal) 55%, transparent);
-    color: var(--palette-matted-old-cream);
-    font-family: 'Autour One', cursive;
-    font-size: 1.1rem;
-    line-height: 1;
-    text-decoration: none;
-  }
-
-  .back-to-school__rail-link .material-symbols-outlined {
-    font-size: 1.65rem;
-    font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-  }
-
-  .back-to-school__rail-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .back-to-school__rail-link:nth-child(1) {
-    z-index: 5;
-    border-radius: 0 1rem 0 0;
-    background: var(--palette-matted-old-crimson);
-  }
-
-  .back-to-school__rail-link:nth-child(2) {
-    z-index: 4;
-    background: var(--palette-matted-old-blue);
-  }
-
-  .back-to-school__rail-link:nth-child(3) {
-    z-index: 3;
-    background: var(--palette-matted-old-cream);
-    color: var(--palette-matted-old-charcoal);
-  }
-
-  .back-to-school__rail-link:nth-child(4) {
-    z-index: 2;
-    background: var(--palette-matted-old-gray);
-    color: var(--palette-matted-old-charcoal);
-  }
-
-  .back-to-school__rail-link:nth-child(5) {
-    z-index: 1;
-    box-shadow: inset -0.55rem 0 0.8rem -0.4rem color-mix(in srgb, var(--palette-matted-old-charcoal) 55%, transparent);
-    background: var(--palette-matted-old-charcoal);
-  }
-
-  .back-to-school__rail-link:focus-visible {
-    outline: 3px solid var(--palette-matted-old-cream);
-    outline-offset: -5px;
-  }
-
   .back-to-school__content {
     --hero-column-left: clamp(1.5rem, 5vw, 4.5rem);
     --hero-column-width: min(29rem, 47%);
 
     position: relative;
-    grid-column: 2;
     min-width: 0;
     min-height: calc(100svh - 5rem);
     overflow: hidden;
@@ -451,23 +328,12 @@
   }
 
   .back-to-school__title {
-    display: flex;
-    align-items: baseline;
-    gap: 0.08em;
     font-family: 'Reenie Beanie', cursive;
     font-size: clamp(6rem, 11.75vw, 8.5rem);
     font-weight: 400;
     line-height: 0.7;
     letter-spacing: 0;
     white-space: nowrap;
-  }
-
-  .back-to-school__title-prefix {
-    color: var(--palette-matted-old-blue);
-    font-family: 'Autour One', cursive;
-    font-size: 0.18em;
-    font-weight: 700;
-    line-height: 1;
   }
 
   .back-to-school__description {
@@ -802,22 +668,6 @@
   }
 
   @media (max-width: 40rem) {
-    .back-to-school {
-      grid-template-columns: 2.65rem minmax(0, 1fr);
-    }
-
-    .back-to-school__rail {
-      height: 82svh;
-    }
-
-    .back-to-school__rail-link {
-      font-size: 0.9rem;
-    }
-
-    .back-to-school__rail-label {
-      display: none;
-    }
-
     .back-to-school__message {
       width: min(21rem, calc(100% - 2rem));
     }
@@ -864,12 +714,32 @@
     text-align: center;
   }
 
+  .home-trust > span:nth-child(1) {
+    background: var(--palette-matted-old-crimson);
+    color: var(--palette-matted-old-cream);
+  }
+
+  .home-trust > span:nth-child(2) {
+    background: var(--palette-matted-old-blue);
+    color: var(--palette-matted-old-cream);
+  }
+
+  .home-trust > span:nth-child(3) {
+    background: var(--palette-matted-old-cream);
+    color: var(--palette-matted-old-charcoal);
+  }
+
+  .home-trust > span:nth-child(4) {
+    background: var(--palette-matted-old-gray);
+    color: var(--palette-matted-old-charcoal);
+  }
+
   .home-trust > span + span {
     border-left: 1px solid rgb(68 68 68 / 16%);
   }
 
   .home-trust .material-symbols-outlined {
-    color: var(--palette-matted-old-crimson);
+    color: inherit;
     font-size: 1.25rem;
   }
 

@@ -83,11 +83,6 @@ p:empty {
 /** Theme styles below */
 body {
   font-family: var(--font-primary--family);
-  background-color: #fff;
-  color: var(--color-foreground);
-}
-
-body.template-index {
   background-color: var(--palette-matted-old-cream);
   color: var(--palette-matted-old-charcoal);
 }

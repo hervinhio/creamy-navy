@@ -1,0 +1,44 @@
+{% doc %}
+  Renders the Ma rentrée wordmark.
+
+  @param {string} [variant] - Use `light` on dark backgrounds.
+
+  @example
+  {% render 'brand-wordmark' %}
+  {% render 'brand-wordmark', variant: 'light' %}
+{% enddoc %}
+
+<span class="brand-wordmark{% if variant == 'light' %} brand-wordmark--light{% endif %}">
+  <span class="brand-wordmark__prefix">{{ 'home.back_to_school.title_prefix' | t }}</span>
+  <span class="brand-wordmark__name">{{ 'home.back_to_school.title' | t }}</span>
+</span>
+
+{% stylesheet %}
+  .brand-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.08em;
+    color: var(--palette-matted-old-charcoal);
+    font-family: 'Reenie Beanie', cursive;
+    font-weight: 400;
+    line-height: 0.7;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .brand-wordmark__prefix {
+    color: var(--palette-matted-old-blue);
+    font-family: 'Autour One', cursive;
+    font-size: 0.18em;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .brand-wordmark--light {
+    color: var(--palette-matted-old-cream);
+  }
+
+  .brand-wordmark--light .brand-wordmark__prefix {
+    color: #ddc173;
+  }
+{% endstylesheet %}

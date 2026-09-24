@@ -47,7 +47,10 @@
 
   <div
     class="back-to-school__content"
-    style="--school-doodles: url('{{ 'school-doodles.svg' | asset_url }}')"
+    style="
+      --wavy-background-horizontal: url('{{ 'wavy-background-horizontal.svg' | asset_url }}');
+      --wavy-background-vertical: url('{{ 'wavy-background-vertical.svg' | asset_url }}');
+    "
   >
     <div class="back-to-school__message">
       <h1 class="back-to-school__title">{{ 'home.back_to_school.title' | t }}</h1>
@@ -68,6 +71,32 @@
         <span>{{ 'home.back_to_school.minutes' | t }}</span>
       </div>
     </div>
+
+    <div class="back-to-school__services">
+      <article class="back-to-school__service">
+        <h2 class="back-to-school__service-title">
+          <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+          {{ 'home.back_to_school.services.online.title' | t }}
+        </h2>
+        <p>{{ 'home.back_to_school.services.online.description' | t }}</p>
+      </article>
+
+      <article class="back-to-school__service">
+        <h2 class="back-to-school__service-title">
+          <span class="material-symbols-outlined" aria-hidden="true">storefront</span>
+          {{ 'home.back_to_school.services.stores.title' | t }}
+        </h2>
+        <p>{{ 'home.back_to_school.services.stores.description' | t }}</p>
+      </article>
+
+      <article class="back-to-school__service">
+        <h2 class="back-to-school__service-title">
+          <span class="material-symbols-outlined" aria-hidden="true">list_alt</span>
+          {{ 'home.back_to_school.services.school_list.title' | t }}
+        </h2>
+        <p>{{ 'home.back_to_school.services.school_list.description' | t }}</p>
+      </article>
+    </div>
   </div>
 </back-to-school-countdown>
 
@@ -79,7 +108,7 @@
     overflow: hidden;
     background: var(--palette-matted-old-cream);
     color: var(--palette-matted-old-charcoal);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Autour One', cursive;
   }
 
   .back-to-school__rail {
@@ -103,7 +132,7 @@
       0 0.2rem 0.4rem -0.1rem color-mix(in srgb, var(--palette-matted-old-charcoal) 30%, transparent),
       inset -0.55rem 0 0.8rem -0.4rem color-mix(in srgb, var(--palette-matted-old-charcoal) 55%, transparent);
     color: var(--palette-matted-old-cream);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Autour One', cursive;
     font-size: 1.1rem;
     line-height: 1;
     text-decoration: none;
@@ -161,38 +190,31 @@
 
   .back-to-school__content {
     position: relative;
-    isolation: isolate;
     grid-column: 2;
     min-width: 0;
     min-height: calc(100svh - 5rem);
     overflow: hidden;
+    background-color: var(--palette-matted-old-cream);
+    background-image: var(--wavy-background-vertical);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 53% 100%;
+    font-family: 'Autour One', cursive;
   }
 
-  .back-to-school__content::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 68%;
-    right: 0;
-    bottom: 0;
-    left: 52%;
-    background-color: var(--palette-matted-old-gray);
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    background-size: contain;
-    mask-image: var(--school-doodles);
-    mask-position: right bottom;
-    mask-repeat: no-repeat;
-    mask-size: contain;
+  @media (min-width: 90rem) {
+    .back-to-school__content {
+      background-size: 47% 100%;
+    }
   }
 
   .back-to-school__message {
     position: absolute;
     z-index: 1;
-    top: 51.5%;
-    left: calc(50% + 0.75rem);
-    width: min(28rem, calc(100% - 3rem));
-    transform: translate(-50%, -50%);
+    top: 36%;
+    left: clamp(1.5rem, 5vw, 4.5rem);
+    width: min(29rem, 47%);
+    transform: translateY(-50%);
   }
 
   .back-to-school__title {
@@ -205,20 +227,18 @@
   }
 
   .back-to-school__description {
-    margin-top: 1.15rem;
-    font-family: 'Poltawski Nowy', serif;
+    margin-top: 1.75rem;
     font-size: 1.06rem;
-    line-height: 1.05;
+    line-height: 1.35;
   }
 
   .back-to-school__countdown {
     position: absolute;
     z-index: 1;
-    bottom: 8.2svh;
-    left: calc(50% - 1.5rem);
+    top: 61%;
+    left: clamp(3rem, 7vw, 6rem);
     display: flex;
     gap: 0.65rem;
-    transform: translateX(-50%);
   }
 
   .back-to-school__time {
@@ -239,9 +259,116 @@
 
   .back-to-school__time span {
     margin-top: 0.3rem;
-    font-family: 'Poltawski Nowy', serif;
     font-size: 0.7rem;
     line-height: 1;
+  }
+
+  .back-to-school__services {
+    position: absolute;
+    top: 50%;
+    right: clamp(1.5rem, 4vw, 4rem);
+    display: grid;
+    align-content: space-between;
+    width: min(34%, 24rem);
+    height: min(72%, 34rem);
+    transform: translateY(-50%);
+    color: var(--palette-matted-old-cream);
+    text-align: center;
+  }
+
+  .back-to-school__service-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .back-to-school__service:nth-child(2) {
+    transform: translateX(-1.75rem);
+  }
+
+  .back-to-school__service:nth-child(3) {
+    transform: translateX(-3.5rem);
+  }
+
+  .back-to-school__service-title .material-symbols-outlined {
+    flex: 0 0 auto;
+    font-size: 1.45rem;
+  }
+
+  .back-to-school__service p {
+    max-width: 24rem;
+    margin: 0.55rem auto 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 70rem), (orientation: portrait) {
+    .back-to-school__content {
+      min-height: max(calc(100svh - 5rem), 44rem);
+      background-image: var(--wavy-background-horizontal);
+      background-position: center bottom;
+      background-size: 100% 65%;
+    }
+
+    .back-to-school__message {
+      top: 17%;
+      left: 50%;
+      width: min(29rem, calc(100% - 2rem));
+      transform: translate(-50%, -50%);
+    }
+
+    .back-to-school__title {
+      font-size: clamp(4.5rem, 10vw, 6rem);
+      white-space: nowrap;
+    }
+
+    .back-to-school__description {
+      margin-top: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .back-to-school__countdown {
+      top: 35%;
+      left: 50%;
+      gap: 0.4rem;
+      transform: translateX(-50%);
+    }
+
+    .back-to-school__time {
+      width: min(4rem, 20vw);
+    }
+
+    .back-to-school__time strong {
+      font-size: 1.4rem;
+    }
+
+    .back-to-school__services {
+      top: 70%;
+      right: auto;
+      left: 50%;
+      width: min(30rem, calc(100% - 2rem));
+      height: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .back-to-school__service-title {
+      font-size: 1rem;
+    }
+
+    .back-to-school__service:nth-child(2),
+    .back-to-school__service:nth-child(3) {
+      transform: none;
+    }
+
+    .back-to-school__service p {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+    }
   }
 
   @media (max-width: 40rem) {
@@ -261,40 +388,24 @@
       display: none;
     }
 
-    .back-to-school__content::before {
-      top: 54%;
-      left: 28%;
-    }
-
     .back-to-school__message {
-      top: 43%;
-      left: 50%;
       width: min(21rem, calc(100% - 2rem));
     }
 
     .back-to-school__title {
       font-size: clamp(2.75rem, 19vw, 5.5rem);
-      white-space: nowrap;
     }
 
     .back-to-school__description {
-      margin-top: 0.9rem;
       font-size: 0.9rem;
-      line-height: 1.12;
     }
 
-    .back-to-school__countdown {
-      bottom: 7svh;
-      left: calc(50% - 1.325rem);
-      gap: 0.4rem;
+    .back-to-school__services {
+      width: min(22rem, calc(100% - 2rem));
     }
 
-    .back-to-school__time {
-      width: min(4rem, 20vw);
-    }
-
-    .back-to-school__time strong {
-      font-size: 1.4rem;
+    .back-to-school__service p {
+      font-size: 0.72rem;
     }
   }
 {% endstylesheet %}

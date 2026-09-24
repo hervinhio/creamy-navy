@@ -61,6 +61,20 @@
       "days": "Jours",
       "hours": "Heures",
       "minutes": "Minutes",
+      "services": {
+        "online": {
+          "title": "Achat en ligne",
+          "description": "Parcourez notre sélection, commandez toutes vos fournitures scolaires en quelques clics et choisissez la livraison qui convient le mieux à votre famille."
+        },
+        "stores": {
+          "title": "Achat dans nos boutiques",
+          "description": "Venez découvrir les essentiels de la rentrée dans nos boutiques et profitez des conseils de notre équipe pour faire les bons choix."
+        },
+        "school_list": {
+          "title": "Envoyez-nous votre trousseau",
+          "description": "Transmettez-nous la liste de fournitures remise par l'établissement de votre enfant. Notre équipe rassemble chaque article, vérifie soigneusement votre trousseau et prépare une commande complète, prête à être récupérée ou livrée selon vos préférences."
+        }
+      },
       "categories": {
         "news": "Accueil",
         "notebooks": "Cahiers",

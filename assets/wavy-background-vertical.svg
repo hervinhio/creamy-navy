@@ -2,21 +2,58 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="162.13741mm"
-   height="297.27863mm"
-   viewBox="0 0 162.13741 297.27863"
+   width="367.53687mm"
+   height="297.84937mm"
+   viewBox="0 0 367.53687 297.84937"
+   preserveAspectRatio="none"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs1" />
+     id="defs1">
+    <filter
+       id="inset-left-shadow"
+       x="-0.1"
+       y="-0.05"
+       width="1.2"
+       height="1.1"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         flood-color="#081b2b"
+         flood-opacity="0.95"
+         result="shadow-color" />
+      <feComposite
+         in="shadow-color"
+         in2="SourceAlpha"
+         operator="out"
+         result="outside" />
+      <feGaussianBlur
+         in="outside"
+         stdDeviation="2.2"
+         result="blurred" />
+      <feOffset
+         in="blurred"
+         dx="5"
+         dy="0"
+         result="offset" />
+      <feComposite
+         in="offset"
+         in2="SourceAlpha"
+         operator="in"
+         result="shadow" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode in="shadow" />
+      </feMerge>
+    </filter>
+  </defs>
   <g
      id="layer1"
-     transform="translate(-47.861144,-0.00103353)">
+     transform="translate(-37.408069,0.5697051)">
     <path
-       style="opacity:0.98;fill:#2f5982;fill-opacity:1;stroke:none;stroke-width:3.09901;stroke-miterlimit:0.5"
-       d="M 134.46059,0.17864959 C 111.82003,44.67906 166.24617,60.843597 117.36658,108.51855 c -12.24733,11.94549 -14.59342,40.89214 -26.775481,58.61248 -26.360814,38.34511 -41.278906,59.23379 -42.151926,77.49672 -1.608802,33.65493 -0.119418,42.83647 7.786672,52.15435 0.827132,0.97483 153.772665,0.21666 153.772665,0.21666 l 4e-5,-296.99772647 z"
+      style="opacity:0.98;fill:#2f5982;fill-opacity:1;stroke:none;stroke-width:4.61812;stroke-miterlimit:0.5;filter:url(#inset-left-shadow)"
+      d="M 160,-0.56970508 C 145,-0.56970508 140,8 138,25 C 133,65 106,78 78.7138,117.49881 c -11.470987,36.46327 40.97943,61.09771 -24.105494,85.55324 -25.399344,9.54376 -22.850445,75.30909 8.857317,93.73005 1.836792,0.97483 341.479227,0.21666 341.479227,0.21666 l 9e-5,-296.99772647 z"
        id="path1" />
   </g>
 </svg>

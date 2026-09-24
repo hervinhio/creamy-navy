@@ -53,11 +53,24 @@
     "
   >
     <div class="back-to-school__message">
-      <h1 class="back-to-school__title">{{ 'home.back_to_school.title' | t }}</h1>
+      <p class="back-to-school__eyebrow">{{ 'home.back_to_school.eyebrow' | t }}</p>
+      <h1 class="back-to-school__title">
+        <span class="back-to-school__title-prefix">{{ 'home.back_to_school.title_prefix' | t }}</span>
+        <span>{{ 'home.back_to_school.title' | t }}</span>
+      </h1>
       <p class="back-to-school__description">{{ 'home.back_to_school.description' | t }}</p>
+      <a class="back-to-school__primary-action" href="{{ routes.all_products_collection_url }}">
+        {{ 'home.back_to_school.primary_action' | t }}
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </a>
     </div>
 
+    {% capture countdown_caption_days %}<span data-countdown-caption-days>250</span>{% endcapture %}
     <div class="back-to-school__countdown" aria-label="{{ 'home.back_to_school.countdown' | t | escape }}">
+      <p class="back-to-school__countdown-caption">
+        <strong>{{ 'home.back_to_school.countdown_caption_html' | t: days: countdown_caption_days }}</strong>
+        <span>{{ 'home.back_to_school.countdown_prompt' | t }}</span>
+      </p>
       <div class="back-to-school__time">
         <strong data-countdown-days>250</strong>
         <span>{{ 'home.back_to_school.days' | t }}</span>
@@ -74,7 +87,6 @@
         <strong data-countdown-seconds>00</strong>
         <span>{{ 'home.back_to_school.seconds' | t }}</span>
       </div>
-      <p class="back-to-school__countdown-caption">{{ 'home.back_to_school.countdown_caption' | t }}</p>
     </div>
 
     <div class="back-to-school__services">
@@ -84,6 +96,10 @@
           {{ 'home.back_to_school.services.online.title' | t }}
         </h2>
         <p>{{ 'home.back_to_school.services.online.description' | t }}</p>
+        <a class="back-to-school__service-action" href="{{ routes.all_products_collection_url }}">
+          <span class="back-to-school__service-action-label">{{ 'home.back_to_school.services.online.action' | t }}</span>
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
       </article>
 
       <article class="back-to-school__service">
@@ -92,6 +108,10 @@
           {{ 'home.back_to_school.services.stores.title' | t }}
         </h2>
         <p>{{ 'home.back_to_school.services.stores.description' | t }}</p>
+        <a class="back-to-school__service-action" href="{{ pages.boutiques.url | default: '/pages/boutiques' }}">
+          <span class="back-to-school__service-action-label">{{ 'home.back_to_school.services.stores.action' | t }}</span>
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
       </article>
 
       <article class="back-to-school__service">
@@ -100,10 +120,206 @@
           {{ 'home.back_to_school.services.school_list.title' | t }}
         </h2>
         <p>{{ 'home.back_to_school.services.school_list.description' | t }}</p>
+        <a class="back-to-school__service-action" href="{{ pages.trousseau.url | default: '/pages/trousseau' }}">
+          <span class="back-to-school__service-action-label">{{ 'home.back_to_school.services.school_list.action' | t }}</span>
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
       </article>
     </div>
   </div>
 </back-to-school-countdown>
+
+<div class="home-commerce full-width">
+  <aside class="home-trust" aria-label="{{ 'home.storefront.trust_label' | t | escape }}">
+    <span><span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>{{ 'home.storefront.trust.online' | t }}</span>
+    <span><span class="material-symbols-outlined" aria-hidden="true">storefront</span>{{ 'home.storefront.trust.pickup' | t }}</span>
+    <span><span class="material-symbols-outlined" aria-hidden="true">list_alt</span>{{ 'home.storefront.trust.school_list' | t }}</span>
+    <span><span class="material-symbols-outlined" aria-hidden="true">book_2</span>{{ 'home.storefront.trust.advice' | t }}</span>
+  </aside>
+
+  <section class="home-discovery" aria-labelledby="home-discovery-title">
+    <div class="home-section-heading">
+      <p>{{ 'home.storefront.discovery.eyebrow' | t }}</p>
+      <h2 id="home-discovery-title">{{ 'home.storefront.discovery.title' | t }}</h2>
+      <span>{{ 'home.storefront.discovery.description' | t }}</span>
+    </div>
+
+    {% assign category_handles = 'sacs,cahiers,livres,ecriture,arts-plastiques,fournitures' | split: ',' %}
+    <div class="home-categories">
+      {% for category_handle in category_handles %}
+        {% assign category = collections[category_handle] %}
+        {% assign category_image = category.image | default: category.products.first.featured_image %}
+        {% capture category_translation_key %}home.storefront.discovery.categories.{{ category_handle | replace: '-', '_' }}{% endcapture %}
+        {% case category_handle %}
+          {% when 'sacs' %}
+            {% assign category_icon = 'backpack' %}
+          {% when 'cahiers' %}
+            {% assign category_icon = 'book_ribbon' %}
+          {% when 'livres' %}
+            {% assign category_icon = 'book_2' %}
+          {% else %}
+            {% assign category_icon = 'architecture' %}
+        {% endcase %}
+
+        <a class="home-category" href="{{ category.url | default: routes.collections_url | append: '/' | append: category_handle }}">
+          <span class="home-category__media">
+            {% if category_image %}
+              {{
+                category_image
+                | image_url: width: 640
+                | image_tag:
+                  class: 'home-category__image',
+                  widths: '240, 360, 480, 640',
+                  sizes: '(max-width: 639px) 44vw, (max-width: 1023px) 29vw, 15vw',
+                  loading: 'lazy'
+              }}
+            {% else %}
+              <span class="material-symbols-outlined" aria-hidden="true">{{ category_icon }}</span>
+            {% endif %}
+          </span>
+          <strong>{{ category_translation_key | t }}</strong>
+          <span>{{ 'home.storefront.discovery.explore' | t }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% liquid
+    assign featured_collection = section.settings.featured_collection
+    if featured_collection == blank
+      assign featured_collection = collections.fournitures
+    endif
+  %}
+  {% if featured_collection.products != blank %}
+    <section class="home-featured" aria-labelledby="home-featured-title">
+      <div class="home-section-heading home-section-heading--light">
+        <p>{{ 'home.storefront.featured.eyebrow' | t }}</p>
+        <h2 id="home-featured-title">{{ 'home.storefront.featured.title' | t }}</h2>
+        <a href="{{ featured_collection.url }}">
+          {{ 'home.storefront.featured.view_all' | t }}
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="home-products">
+        {% for product in featured_collection.products limit: section.settings.product_limit %}
+          {% assign selected_variant = product.selected_or_first_available_variant %}
+          <article class="home-product">
+            <a class="home-product__media" href="{{ product.url }}">
+              {% if product.featured_image %}
+                {{
+                  product.featured_image
+                  | image_url: width: 720
+                  | image_tag:
+                    class: 'home-product__image',
+                    widths: '280, 440, 600, 720',
+                    sizes: '(max-width: 639px) 44vw, (max-width: 1023px) 22vw, 18vw',
+                    loading: 'lazy'
+                }}
+              {% endif %}
+            </a>
+            <div class="home-product__details">
+              <h3>{{ product.title | escape | link_to: product.url }}</h3>
+              <p>{{ product.price | money }}</p>
+              {% if product.has_only_default_variant %}
+                {% form 'product', product, class: 'home-product__form' %}
+                  <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" {% unless selected_variant.available %}disabled{% endunless %}>
+                    {% if selected_variant.available %}
+                      <span class="material-symbols-outlined" aria-hidden="true">add_shopping_cart</span>
+                      {{ 'home.storefront.featured.add_to_cart' | t }}
+                    {% else %}
+                      {{ 'home.storefront.featured.sold_out' | t }}
+                    {% endif %}
+                  </button>
+                {% endform %}
+              {% else %}
+                <a class="home-product__options" href="{{ product.url }}">
+                  {{ 'home.storefront.featured.choose_options' | t }}
+                  <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </a>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="home-how-to-buy" aria-labelledby="home-how-to-buy-title">
+    <div class="home-section-heading">
+      <p>{{ 'home.storefront.how_to_buy.eyebrow' | t }}</p>
+      <h2 id="home-how-to-buy-title">{{ 'home.storefront.how_to_buy.title' | t }}</h2>
+      <span>{{ 'home.storefront.how_to_buy.description' | t }}</span>
+    </div>
+    <ol class="home-how-to-buy__steps">
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+        <strong>{{ 'home.storefront.how_to_buy.steps.choose_title' | t }}</strong>
+        <p>{{ 'home.storefront.how_to_buy.steps.choose_description' | t }}</p>
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+        <strong>{{ 'home.storefront.how_to_buy.steps.cart_title' | t }}</strong>
+        <p>{{ 'home.storefront.how_to_buy.steps.cart_description' | t }}</p>
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">storefront</span>
+        <strong>{{ 'home.storefront.how_to_buy.steps.fulfillment_title' | t }}</strong>
+        <p>{{ 'home.storefront.how_to_buy.steps.fulfillment_description' | t }}</p>
+      </li>
+      <li>
+        <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>
+        <strong>{{ 'home.storefront.how_to_buy.steps.receive_title' | t }}</strong>
+        <p>{{ 'home.storefront.how_to_buy.steps.receive_description' | t }}</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="home-school-list" aria-labelledby="home-school-list-title">
+    <div class="home-school-list__intro">
+      <span class="material-symbols-outlined" aria-hidden="true">list_alt</span>
+      <p>{{ 'home.storefront.school_list.eyebrow' | t }}</p>
+      <h2 id="home-school-list-title">{{ 'home.storefront.school_list.title' | t }}</h2>
+      <span>{{ 'home.storefront.school_list.description' | t }}</span>
+      <a href="{{ pages.trousseau.url | default: '/pages/trousseau' }}">
+        {{ 'home.storefront.school_list.action' | t }}
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+    <ol class="home-school-list__steps">
+      <li><strong>1</strong><span>{{ 'home.storefront.school_list.steps.send' | t }}</span></li>
+      <li><strong>2</strong><span>{{ 'home.storefront.school_list.steps.prepare' | t }}</span></li>
+      <li><strong>3</strong><span>{{ 'home.storefront.school_list.steps.collect' | t }}</span></li>
+    </ol>
+  </section>
+
+  <section class="home-credibility" aria-labelledby="home-credibility-title">
+    <div class="home-section-heading">
+      <p>{{ 'home.storefront.credibility.eyebrow' | t }}</p>
+      <h2 id="home-credibility-title">{{ 'home.storefront.credibility.title' | t }}</h2>
+      <span>{{ 'home.storefront.credibility.description' | t }}</span>
+    </div>
+    <div class="home-credibility__groups">
+      <article>
+        <span class="material-symbols-outlined" aria-hidden="true">family_restroom</span>
+        <h3>{{ 'home.storefront.credibility.parents.title' | t }}</h3>
+        <p>{{ 'home.storefront.credibility.parents.description' | t }}</p>
+      </article>
+      <article>
+        <span class="material-symbols-outlined" aria-hidden="true">school</span>
+        <h3>{{ 'home.storefront.credibility.schools.title' | t }}</h3>
+        <p>{{ 'home.storefront.credibility.schools.description' | t }}</p>
+      </article>
+      <article>
+        <span class="material-symbols-outlined" aria-hidden="true">account_balance</span>
+        <h3>{{ 'home.storefront.credibility.organizations.title' | t }}</h3>
+        <p>{{ 'home.storefront.credibility.organizations.description' | t }}</p>
+      </article>
+    </div>
+  </section>
+</div>
 
 {% stylesheet %}
   .back-to-school {
@@ -194,6 +410,9 @@
   }
 
   .back-to-school__content {
+    --hero-column-left: clamp(1.5rem, 5vw, 4.5rem);
+    --hero-column-width: min(29rem, 47%);
+
     position: relative;
     grid-column: 2;
     min-width: 0;
@@ -217,12 +436,24 @@
     position: absolute;
     z-index: 1;
     top: 36%;
-    left: clamp(1.5rem, 5vw, 4.5rem);
-    width: min(29rem, 47%);
+    left: var(--hero-column-left);
+    width: var(--hero-column-width);
     transform: translateY(-50%);
   }
 
+  .back-to-school__eyebrow {
+    margin-bottom: 0.75rem;
+    color: var(--palette-matted-old-crimson);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
   .back-to-school__title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.08em;
     font-family: 'Reenie Beanie', cursive;
     font-size: clamp(6rem, 11.75vw, 8.5rem);
     font-weight: 400;
@@ -231,20 +462,59 @@
     white-space: nowrap;
   }
 
+  .back-to-school__title-prefix {
+    color: var(--palette-matted-old-blue);
+    font-family: 'Autour One', cursive;
+    font-size: 0.18em;
+    font-weight: 700;
+    line-height: 1;
+  }
+
   .back-to-school__description {
     margin-top: 1.75rem;
     font-size: 1.06rem;
     line-height: 1.35;
   }
 
+  .back-to-school__primary-action {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    margin: 1.25rem auto 0;
+    padding: 0.8rem 1.25rem;
+    border: 0;
+    border-radius: 0.35rem;
+    outline: 0;
+    background: #ddc173;
+    color: var(--palette-matted-old-charcoal);
+    font-size: 0.94rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .back-to-school__primary-action .material-symbols-outlined {
+    font-size: 1.1rem;
+  }
+
+  .back-to-school__service-action:focus-visible {
+    outline: 3px solid currentcolor;
+    outline-offset: 3px;
+  }
+
+  .back-to-school__primary-action:focus-visible {
+    box-shadow: 0 0 0 3px var(--palette-matted-old-charcoal);
+  }
+
   .back-to-school__countdown {
     position: absolute;
     z-index: 1;
     top: 61%;
-    left: clamp(3rem, 7vw, 6rem);
+    left: calc(var(--hero-column-left) + var(--hero-column-width) / 2);
     display: grid;
     grid-template-columns: repeat(4, 4.65rem);
     gap: 0.5rem 0.65rem;
+    transform: translateX(-50%);
   }
 
   .back-to-school__time {
@@ -339,11 +609,20 @@
 
   .back-to-school__countdown-caption {
     grid-column: 1 / -1;
-    margin: 0;
+    margin: 0 0 0.2rem;
     color: #444444;
-    font-size: 10px;
-    line-height: 1;
+    font-size: 0.7rem;
+    line-height: 1.3;
     text-align: center;
+  }
+
+  .back-to-school__countdown-caption strong,
+  .back-to-school__countdown-caption span {
+    display: block;
+  }
+
+  .back-to-school__countdown-caption strong {
+    font-weight: 700;
   }
 
   @keyframes back-to-school-flip-top {
@@ -386,9 +665,10 @@
     top: 50%;
     right: clamp(1.5rem, 4vw, 4rem);
     display: grid;
-    align-content: space-between;
+    align-content: center;
+    gap: clamp(2.5rem, 6vh, 4rem);
     width: min(34%, 24rem);
-    height: min(72%, 34rem);
+    height: min(68%, 32rem);
     transform: translateY(-50%);
     color: var(--palette-matted-old-cream);
     text-align: center;
@@ -399,9 +679,15 @@
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    font-size: 1.1rem;
+    font-size: clamp(1.35rem, 1.6vw, 1.6rem);
     font-weight: 400;
     line-height: 1.1;
+  }
+
+  .back-to-school__service {
+    display: grid;
+    justify-items: center;
+    min-height: 7rem;
   }
 
   .back-to-school__service:nth-child(2) {
@@ -414,7 +700,7 @@
 
   .back-to-school__service-title .material-symbols-outlined {
     flex: 0 0 auto;
-    font-size: 1.45rem;
+    font-size: 1.7rem;
   }
 
   .back-to-school__service p {
@@ -422,6 +708,26 @@
     margin: 0.55rem auto 0;
     font-size: 0.78rem;
     line-height: 1.35;
+  }
+
+  .back-to-school__service-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    color: inherit;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .back-to-school__service-action-label {
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+
+  .back-to-school__service-action .material-symbols-outlined {
+    font-size: 1rem;
   }
 
   @media (max-width: 70rem), (orientation: portrait) {
@@ -472,11 +778,16 @@
       left: 50%;
       width: min(30rem, calc(100% - 2rem));
       height: 44%;
+      gap: 1.25rem;
       transform: translate(-50%, -50%);
     }
 
+    .back-to-school__service {
+      min-height: 0;
+    }
+
     .back-to-school__service-title {
-      font-size: 1rem;
+      font-size: 1.35rem;
     }
 
     .back-to-school__service:nth-child(2),
@@ -527,6 +838,419 @@
       font-size: 0.72rem;
     }
   }
+
+  .home-commerce {
+    background: #f8f5ec;
+    color: var(--palette-matted-old-charcoal);
+    font-family: 'Autour One', cursive;
+  }
+
+  .home-trust {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-block: 1px solid rgb(68 68 68 / 16%);
+    background: var(--palette-matted-old-cream);
+  }
+
+  .home-trust > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 4.5rem;
+    padding: 0.75rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .home-trust > span + span {
+    border-left: 1px solid rgb(68 68 68 / 16%);
+  }
+
+  .home-trust .material-symbols-outlined {
+    color: var(--palette-matted-old-crimson);
+    font-size: 1.25rem;
+  }
+
+  .home-discovery,
+  .home-featured,
+  .home-how-to-buy,
+  .home-school-list,
+  .home-credibility {
+    padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 6vw, 6rem);
+  }
+
+  .home-section-heading {
+    max-width: 44rem;
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .home-section-heading > p,
+  .home-school-list__intro > p {
+    margin-bottom: 0.65rem;
+    color: var(--palette-matted-old-crimson);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .home-credibility .home-section-heading > p {
+    font-size: 1rem;
+  }
+
+  .home-section-heading h2,
+  .home-school-list h2 {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+  }
+
+  .home-section-heading > span,
+  .home-school-list__intro > span:not(.material-symbols-outlined) {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .home-categories {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(0.65rem, 1.5vw, 1.25rem);
+    max-width: 90rem;
+    margin: 0 auto;
+  }
+
+  .home-category {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-radius: 0.4rem;
+    background: #ffffff;
+    box-shadow: 0 0.7rem 2rem rgb(68 68 68 / 9%);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .home-category__media {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 1 / 0.9;
+    overflow: hidden;
+    background: #ddc173;
+  }
+
+  .home-category:nth-child(2n) .home-category__media {
+    background: var(--palette-matted-old-blue);
+  }
+
+  .home-category:nth-child(3n) .home-category__media {
+    background: var(--palette-matted-old-crimson);
+  }
+
+  .home-category__media > .material-symbols-outlined {
+    color: var(--palette-matted-old-cream);
+    font-size: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .home-category__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .home-category > strong {
+    padding: 1rem 0.85rem 0;
+    font-size: 0.88rem;
+    line-height: 1.25;
+  }
+
+  .home-category > span:last-child {
+    padding: 0.4rem 0.85rem 1rem;
+    font-size: 0.68rem;
+    text-decoration: underline;
+    text-underline-offset: 0.18rem;
+  }
+
+  .home-featured {
+    background: var(--palette-matted-old-charcoal);
+    color: var(--palette-matted-old-cream);
+  }
+
+  .home-section-heading--light > p {
+    color: #ddc173;
+  }
+
+  .home-section-heading a,
+  .home-school-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1.2rem;
+    color: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+
+  .home-section-heading a .material-symbols-outlined,
+  .home-school-list a .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  .home-products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2.5rem);
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .home-product {
+    min-width: 0;
+  }
+
+  .home-product__media {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #ddc173;
+  }
+
+  .home-product__image {
+    width: 82%;
+    height: 82%;
+    object-fit: contain;
+  }
+
+  .home-product__details {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .home-product__details h3 {
+    font-family: 'Autour One', cursive;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .home-product__details a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .home-product__details p {
+    margin-top: 0.5rem;
+    color: #ddc173;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .home-product__form,
+  .home-product__options {
+    margin-top: 1rem;
+  }
+
+  .home-product__form button,
+  .home-product__options {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.65rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid #ddc173;
+    border-radius: 0.3rem;
+    background: transparent;
+    color: var(--palette-matted-old-cream);
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .home-product__form button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .home-product__form .material-symbols-outlined,
+  .home-product__options .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  .home-how-to-buy {
+    background: #f8f5ec;
+  }
+
+  .home-how-to-buy__steps,
+  .home-credibility__groups {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0;
+    background: rgb(68 68 68 / 16%);
+    list-style: none;
+  }
+
+  .home-how-to-buy__steps li,
+  .home-credibility__groups article {
+    min-width: 0;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: #f8f5ec;
+  }
+
+  .home-how-to-buy__steps .material-symbols-outlined,
+  .home-credibility__groups .material-symbols-outlined {
+    color: var(--palette-matted-old-crimson);
+    font-size: 1.8rem;
+  }
+
+  .home-how-to-buy__steps strong,
+  .home-credibility__groups h3 {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .home-how-to-buy__steps p,
+  .home-credibility__groups p {
+    margin-top: 0.65rem;
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .home-school-list {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+    background: var(--palette-matted-old-blue);
+    color: var(--palette-matted-old-cream);
+  }
+
+  .home-school-list__intro {
+    max-width: 35rem;
+  }
+
+  .home-school-list__intro > .material-symbols-outlined {
+    margin-bottom: 1rem;
+    color: #ddc173;
+    font-size: 2rem;
+  }
+
+  .home-school-list__intro > p {
+    color: #ddc173;
+  }
+
+  .home-school-list__steps {
+    display: grid;
+    gap: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-school-list__steps li {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+    min-height: 5.5rem;
+    border-bottom: 1px solid rgb(238 233 219 / 28%);
+  }
+
+  .home-school-list__steps strong {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    border: 1px solid #ddc173;
+    border-radius: 50%;
+    color: #ddc173;
+  }
+
+  .home-school-list__steps span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .home-credibility {
+    background: var(--palette-matted-old-cream);
+  }
+
+  .home-credibility__groups {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-credibility__groups article {
+    background: var(--palette-matted-old-cream);
+  }
+
+  @media (hover: hover) {
+    .home-category:hover,
+    .home-category:focus-visible {
+      transform: translateY(-0.35rem);
+      box-shadow: 0 1.1rem 2.4rem rgb(68 68 68 / 16%);
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .home-categories {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .home-trust {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-trust > span:nth-child(3) {
+      border-left: 0;
+    }
+
+    .home-trust > span:nth-child(n + 3) {
+      border-top: 1px solid rgb(68 68 68 / 16%);
+    }
+
+    .home-categories {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 1rem;
+    }
+
+    .home-how-to-buy__steps,
+    .home-credibility__groups {
+      grid-template-columns: 1fr;
+    }
+
+    .home-school-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-category {
+      transition: none;
+    }
+  }
 {% endstylesheet %}
 
 {% javascript %}
@@ -534,6 +1258,7 @@
     connectedCallback() {
       this.deadline = new Date(this.dataset.deadline).getTime()
       this.days = this.querySelector('[data-countdown-days]')
+      this.captionDays = this.querySelector('[data-countdown-caption-days]')
       this.hours = this.querySelector('[data-countdown-hours]')
       this.minutes = this.querySelector('[data-countdown-minutes]')
       this.seconds = this.querySelector('[data-countdown-seconds]')
@@ -552,8 +1277,10 @@
     update() {
       const remaining = Math.max(0, this.deadline - Date.now())
       const totalSeconds = Math.floor(remaining / 1000)
+      this.daysRemaining = Math.floor(totalSeconds / 86400)
 
-      this.setValue(this.days, Math.floor(totalSeconds / 86400))
+      this.captionDays.textContent = this.daysRemaining
+      this.setValue(this.days, this.daysRemaining)
       this.setValue(this.hours, Math.floor((totalSeconds % 86400) / 3600))
       this.setValue(this.minutes, Math.floor((totalSeconds % 3600) / 60))
       this.setValue(this.seconds, totalSeconds % 60)
@@ -608,6 +1335,20 @@
       "label": "t:labels.countdown_deadline",
       "info": "t:info.countdown_deadline",
       "default": "2027-06-06T00:00:00+02:00"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "t:labels.featured_collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "t:labels.product_limit",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
     }
   ],
   "presets": [

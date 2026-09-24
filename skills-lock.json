@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "shopify-liquid": {
+      "source": "Shopify/shopify-ai-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/shopify-liquid/SKILL.md",
+      "computedHash": "975e02d0eb06e6293eba7afc3204095f8459561ecc3a3e07998bbd3fb581c44b"
+    }
+  }
+}

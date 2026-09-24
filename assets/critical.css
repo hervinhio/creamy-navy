@@ -57,6 +57,15 @@ h6 {
   overflow-wrap: break-word;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Reenie Beanie", cursive;
+}
+
 p:empty {
   display: none;
 }
@@ -76,11 +85,6 @@ body {
   font-family: var(--font-primary--family);
   background-color: #fff;
   color: var(--color-foreground);
-}
-
-body,
-body * {
-  cursor: var(--pen-cursor);
 }
 
 body.template-index {
@@ -127,7 +131,7 @@ body.template-index {
 }
 
 .poltawski-nowy-h1 {
-  font-family: "Autour One", cursive;
+  font-family: "Reenie Beanie", cursive;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;

@@ -1,13 +1,8 @@
 <header>
   <h2 class="header__title">
-    <a href="{{ routes.root_url }}" aria-label="Ma rentrée">
-      <img
-        class="header__logo"
-        src="{{ 'ma-rentree-logo.png' | asset_url }}"
-        width="472"
-        height="304"
-        alt="Ma rentrée"
-      >
+    <a class="header__brand" href="{{ routes.root_url }}" aria-label="{{ 'header.brand_name' | t | escape }}">
+      <strong>{{ 'header.brand_name' | t }}</strong>
+      <span>{{ 'header.campaign_name' | t }}</span>
     </a>
   </h2>
 
@@ -16,6 +11,21 @@
       {{ link.title | link_to: link.url }}
     {% endfor %}
   </div>
+
+  <form class="header__search" action="{{ routes.search_url }}" method="get" role="search">
+    <input type="hidden" name="options[prefix]" value="last">
+    <input type="hidden" name="type" value="product">
+    <input
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'search.placeholder' | t | escape }}"
+      aria-label="{{ 'search.placeholder' | t | escape }}"
+    >
+    <button type="submit" aria-label="{{ 'search.submit' | t | escape }}">
+      <span class="material-symbols-outlined" aria-hidden="true">search</span>
+    </button>
+  </form>
 
   <div class="header__icons">
     {% if shop.customer_accounts_enabled %}
@@ -61,14 +71,89 @@
     width: 2rem;
     color: var(--palette-matted-old-charcoal);
   }
-  header .header__logo {
-    width: 4.5rem;
-    height: auto;
+  header .header__brand {
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+  }
+
+  header .header__brand strong {
+    color: var(--palette-matted-old-blue);
+    font-family: 'Autour One', cursive;
+    font-size: 1.15rem;
+    letter-spacing: 0;
+  }
+
+  header .header__brand span {
+    margin-top: 0.25rem;
+    color: var(--palette-matted-old-crimson);
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1rem;
+    font-weight: 400;
   }
   header .header__menu,
   header .header__icons {
     display: flex;
     gap: 1rem;
+  }
+
+  header .header__search {
+    position: relative;
+    display: flex;
+    width: clamp(8rem, 24vw, 18rem);
+    margin-left: auto;
+  }
+
+  header .header__search input[type='search'] {
+    width: 100%;
+    min-width: 0;
+    height: 2.4rem;
+    padding: 0.45rem 2.5rem 0.45rem 0.8rem;
+    border: 1px solid rgb(68 68 68 / 35%);
+    border-radius: 0.3rem;
+    outline: 0;
+    background: rgb(255 255 255 / 48%);
+    color: var(--palette-matted-old-charcoal);
+    font-family: 'Autour One', cursive;
+    font-size: 0.74rem;
+  }
+
+  header .header__search input[type='search']:focus-visible {
+    border-color: var(--palette-matted-old-blue);
+    box-shadow: 0 0 0 2px var(--palette-matted-old-blue);
+  }
+
+  header .header__search button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--palette-matted-old-charcoal);
+    cursor: pointer;
+  }
+
+  header .header__search .material-symbols-outlined {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 40rem) {
+    header .header__menu {
+      display: none;
+    }
+
+    header .header__search {
+      width: min(9rem, 38vw);
+    }
+
+    header .header__search input[type='search'] {
+      font-size: 0.68rem;
+    }
   }
 {% endstylesheet %}
 

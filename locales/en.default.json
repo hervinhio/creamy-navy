@@ -28,18 +28,28 @@
     }
   },
   "footer": {
-    "primary_navigation": "Shop navigation",
-    "secondary_navigation": "Customer information",
-    "products": "Products",
+    "primary_navigation": "Navigation de la boutique",
+    "secondary_navigation": "Informations client",
+    "products": "Produits",
     "about": "About",
     "blog": "Blog",
-    "shipping": "Shipping",
-    "returns": "Returns",
+    "stores": "Boutiques",
+    "school_list": "Service trousseau",
+    "faq": "FAQ",
+    "shipping": "Livraison et retrait",
+    "returns": "Retours",
     "contact": "Contact",
-    "newsletter_title": "Sign up to our newsletter",
-    "email": "Email address",
+    "tagline": "Fournitures scolaires, conseils et préparation de trousseaux.",
+    "payment_methods": "Moyens de paiement acceptés",
+    "newsletter_title": "Recevez les nouvelles de Ma rentrée",
+    "email": "Adresse e-mail",
     "email_placeholder": "email@example.com",
-    "newsletter_success": "Thanks for signing up."
+    "newsletter_submit": "S'inscrire à la newsletter",
+    "newsletter_success": "Merci pour votre inscription."
+  },
+  "header": {
+    "brand_name": "Ma rentrée",
+    "campaign_name": "Fournitures scolaires"
   },
   "collections": {
     "title": "Collections",
@@ -53,36 +63,117 @@
     "use_at_checkout": "Use this gift card at checkout"
   },
   "home": {
+    "storefront": {
+      "trust_label": "Services Ma rentrée",
+      "trust": {
+        "online": "Commande en ligne",
+        "pickup": "Retrait en boutique",
+        "school_list": "Commande par trousseau",
+        "advice": "Conseils en boutique"
+      },
+      "discovery": {
+        "eyebrow": "Tout pour bien commencer",
+        "title": "Tout pour sa rentrée",
+        "description": "Découvrez les essentiels de l'année scolaire, réunis par catégorie.",
+        "explore": "Découvrir",
+        "categories": {
+          "sacs": "Sacs & cartables",
+          "cahiers": "Cahiers",
+          "livres": "Livres",
+          "ecriture": "Écriture",
+          "arts_plastiques": "Arts plastiques",
+          "fournitures": "Fournitures"
+        }
+      },
+      "featured": {
+        "eyebrow": "La sélection Ma rentrée",
+        "title": "Les indispensables de la rentrée",
+        "view_all": "Voir tous les produits",
+        "add_to_cart": "Ajouter au panier",
+        "choose_options": "Choisir les options",
+        "sold_out": "Épuisé"
+      },
+      "how_to_buy": {
+        "eyebrow": "Comment ça marche ?",
+        "title": "Vos fournitures, simplement",
+        "description": "Du catalogue à la récupération de votre commande, chaque étape est claire.",
+        "steps": {
+          "choose_title": "Choisissez vos fournitures",
+          "choose_description": "Parcourez les catégories ou recherchez directement un article.",
+          "cart_title": "Composez votre panier",
+          "cart_description": "Ajoutez les produits et quantités dont vous avez besoin.",
+          "fulfillment_title": "Choisissez votre retrait",
+          "fulfillment_description": "Sélectionnez l'option disponible qui vous convient lors de la commande.",
+          "receive_title": "Récupérez votre commande",
+          "receive_description": "Nous vous indiquons quand vos fournitures sont prêtes en boutique."
+        }
+      },
+      "school_list": {
+        "eyebrow": "Un service qui simplifie la rentrée",
+        "title": "Votre trousseau, sans la course aux rayons",
+        "description": "Envoyez-nous la liste de fournitures de votre enfant. Notre équipe réunit les articles pour vous.",
+        "action": "Envoyer mon trousseau",
+        "steps": {
+          "send": "Envoyez-nous votre liste de fournitures.",
+          "prepare": "Notre équipe prépare les articles demandés.",
+          "collect": "Récupérez votre commande prête en boutique."
+        }
+      },
+      "credibility": {
+        "eyebrow": "À vos côtés pour la rentrée",
+        "title": "Une expertise pour chaque besoin scolaire",
+        "description": "Ma rentrée accompagne les familles et les acteurs de l'éducation avec un catalogue dédié et des conseils en boutique.",
+        "parents": {
+          "title": "Parents",
+          "description": "Des essentiels faciles à trouver et un service trousseau qui fait gagner du temps."
+        },
+        "schools": {
+          "title": "Écoles",
+          "description": "Des fournitures adaptées aux listes scolaires et aux besoins des classes."
+        },
+        "organizations": {
+          "title": "Institutions",
+          "description": "Un interlocuteur en boutique pour orienter les commandes de fournitures."
+        }
+      }
+    },
     "back_to_school": {
+      "eyebrow": "La rentrée avec Ma rentrée",
+      "title_prefix": "Ma",
       "title": "Rentrée",
-      "description": "Toutes vos fournitures scolaire en un seul endroit. En quelques cliques, depuis le confort de chez vous, offrez à votre enfant un souvenir, une marque d'affection, une rentrée scolaire et une année épanouie.",
+      "description": "Toutes les fournitures scolaires réunies au même endroit. Depuis chez vous, préparez la rentrée de votre enfant en quelques clics.",
+      "primary_action": "Voir le catalogue",
       "navigation": "Catégories de la boutique",
       "countdown": "Compte à rebours jusqu'à la rentrée",
-      "countdown_caption": "Avant la rentrée",
+      "countdown_caption_html": "La rentrée dans {{ days }} jours.",
+      "countdown_prompt": "Préparez-vous dès maintenant.",
       "days": "Jours",
       "hours": "Heures",
       "minutes": "Minutes",
       "seconds": "Secondes",
       "services": {
         "online": {
-          "title": "Achat en ligne",
-          "description": "Parcourez notre sélection, commandez toutes vos fournitures scolaires en quelques clics et choisissez la livraison qui convient le mieux à votre famille."
+          "title": "Acheter en ligne",
+          "description": "Commandez vos fournitures depuis chez vous en quelques clics.",
+          "action": "Voir le catalogue"
         },
         "stores": {
-          "title": "Achat dans nos boutiques",
-          "description": "Venez découvrir les essentiels de la rentrée dans nos boutiques et profitez des conseils de notre équipe pour faire les bons choix."
+          "title": "Acheter en boutique",
+          "description": "Retrouvez les essentiels de la rentrée et les conseils de notre équipe.",
+          "action": "Voir nos boutiques"
         },
         "school_list": {
-          "title": "Envoyez-nous votre trousseau",
-          "description": "Transmettez-nous la liste de fournitures remise par l'établissement de votre enfant. Notre équipe rassemble chaque article, vérifie soigneusement votre trousseau et prépare une commande complète, prête à être récupérée ou livrée selon vos préférences."
+          "title": "Vous avez un trousseau ?",
+          "description": "Envoyez-le-nous. Nous le préparons pour votre retrait en boutique.",
+          "action": "Envoyer mon trousseau"
         }
       },
       "categories": {
         "news": "Accueil",
         "notebooks": "Cahiers",
-        "bags": "Sacs",
+        "bags": "Sacs & cartables",
         "books": "Livres",
-        "supplies": "Utilitaires"
+        "supplies": "Fournitures"
       }
     },
     "hero": {
@@ -101,9 +192,9 @@
     "enter": "Enter"
   },
   "search": {
-    "title": "Search",
-    "placeholder": "Search articles, pages, or products",
-    "submit": "Search",
+    "title": "Recherche",
+    "placeholder": "Rechercher un produit...",
+    "submit": "Rechercher",
     "no_results_html": "No results found for {{ terms }}",
     "results_for_html": "{{ count }} results found for {{ terms }}"
   }

@@ -1,18 +1,12 @@
 <footer class="footer full-width">
   <div class="footer__inner">
     <div class="footer__brand">
-      <a class="footer__logo-link" href="{{ routes.root_url }}" aria-label="Lokos">
-        <img
-          class="footer__logo"
-          src="{{ 'lemon-green-logo-light.png' | asset_url }}"
-          width="716"
-          height="282"
-          alt="Lokos"
-          loading="lazy"
-        >
+      <a class="footer__logo-link" href="{{ routes.root_url }}" aria-label="{{ 'header.brand_name' | t | escape }}">
+        {{ 'header.brand_name' | t }}
       </a>
+      <p class="footer__tagline">{{ 'footer.tagline' | t }}</p>
       <p class="footer__copyright">
-        &copy; {{ 'now' | date: '%Y' }}, Lokos. {{ powered_by_link }}
+        &copy; {{ 'now' | date: '%Y' }}, {{ 'header.brand_name' | t }}. {{ powered_by_link }}
       </p>
     </div>
 
@@ -23,8 +17,9 @@
         {% endfor %}
       {% else %}
         <a href="{{ routes.all_products_collection_url }}">{{ 'footer.products' | t }}</a>
-        <a href="{{ pages.about.url | default: '/pages/about' }}">{{ 'footer.about' | t }}</a>
-        <a href="{{ routes.blogs_url }}">{{ 'footer.blog' | t }}</a>
+        <a href="{{ pages.boutiques.url | default: '/pages/boutiques' }}">{{ 'footer.stores' | t }}</a>
+        <a href="{{ pages.trousseau.url | default: '/pages/trousseau' }}">{{ 'footer.school_list' | t }}</a>
+        <a href="{{ pages.faq.url | default: '/pages/faq' }}">{{ 'footer.faq' | t }}</a>
       {% endif %}
     </nav>
 
@@ -37,6 +32,12 @@
         <a href="{{ pages.shipping.url | default: '/pages/shipping' }}">{{ 'footer.shipping' | t }}</a>
         <a href="{{ pages.returns.url | default: '/pages/returns' }}">{{ 'footer.returns' | t }}</a>
         <a href="{{ pages.contact.url | default: '/pages/contact' }}">{{ 'footer.contact' | t }}</a>
+        {% if shop.privacy_policy.url != blank %}
+          <a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title }}</a>
+        {% endif %}
+        {% if shop.terms_of_service.url != blank %}
+          <a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title }}</a>
+        {% endif %}
       {% endif %}
     </nav>
 
@@ -56,12 +57,22 @@
           autocapitalize="off"
           required
         >
+        <button type="submit" aria-label="{{ 'footer.newsletter_submit' | t | escape }}">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </button>
         {% if form.posted_successfully? %}
           <p class="footer__form-message" tabindex="-1">{{ 'footer.newsletter_success' | t }}</p>
         {% elsif form.errors %}
           <p class="footer__form-message" tabindex="-1">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
         {% endif %}
       {% endform %}
+      {% if shop.enabled_payment_types != blank %}
+        <div class="footer__payments" aria-label="{{ 'footer.payment_methods' | t | escape }}">
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </footer>
@@ -73,8 +84,8 @@
     min-height: 15.75rem;
     margin-top: 0;
     padding: 3.75rem 0;
-    background: var(--color-primary);
-    color: #000;
+    background: var(--palette-matted-old-charcoal);
+    color: var(--palette-matted-old-cream);
   }
 
   .footer__inner {
@@ -93,17 +104,18 @@
 
   .footer__logo-link {
     display: block;
-    width: 10rem;
+    width: fit-content;
+    color: #ddc173;
+    font-family: 'Autour One', cursive;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
 
-  .footer__logo {
-    width: 100%;
-    height: auto;
-  }
-
+  .footer__tagline,
   .footer__copyright {
-    margin-top: 0.35rem;
+    margin-top: 0.65rem;
     font-size: 0.75rem;
+    line-height: 1.5;
   }
 
   .footer__links {
@@ -124,28 +136,60 @@
   }
 
   .footer__newsletter-form {
+    position: relative;
     margin-top: 0.7rem;
   }
 
   .footer__newsletter-form input[type='email'] {
     width: 100%;
     min-height: 2rem;
-    padding: 0.4rem 0.7rem;
-    border: 1px solid #000;
+    padding: 0.4rem 2.5rem 0.4rem 0.7rem;
+    border: 1px solid var(--palette-matted-old-cream);
     border-radius: 0;
     background: transparent;
-    color: #000;
+    color: var(--palette-matted-old-cream);
     font-size: 0.8rem;
   }
 
+  .footer__newsletter-form button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--palette-matted-old-cream);
+    cursor: pointer;
+  }
+
+  .footer__newsletter-form button .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
   .footer__newsletter-form input::placeholder {
-    color: rgb(0 0 0 / 70%);
+    color: rgb(238 233 219 / 70%);
     opacity: 1;
   }
 
   .footer__form-message {
     margin-top: 0.5rem;
     font-size: 0.75rem;
+  }
+
+  .footer__payments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .footer__payments svg {
+    width: 2.4rem;
+    height: auto;
   }
 
   .visually-hidden {

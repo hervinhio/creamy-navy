@@ -109,13 +109,13 @@
         {% capture category_translation_key %}home.storefront.discovery.categories.{{ category_handle | replace: '-', '_' }}{% endcapture %}
         {% case category_handle %}
           {% when 'sacs' %}
-            {% assign category_photo_asset = 'category-backpacks.jpg' %}
+            {% assign category_photo_asset = 'category-backpacks.webp' %}
           {% when 'cahiers' %}
-            {% assign category_photo_asset = 'category-notebooks.jpg' %}
+            {% assign category_photo_asset = 'category-notebooks.webp' %}
           {% when 'livres' %}
-            {% assign category_photo_asset = 'category-books.jpg' %}
+            {% assign category_photo_asset = 'category-books.webp' %}
           {% when 'ecriture' %}
-            {% assign category_photo_asset = 'category-writing.jpg' %}
+            {% assign category_photo_asset = 'category-writing.webp' %}
           {% when 'arts-plastiques' %}
             {% assign category_photo_asset = 'category-art-supplies.jpg' %}
           {% when 'fournitures' %}

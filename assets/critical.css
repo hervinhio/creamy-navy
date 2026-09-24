@@ -78,6 +78,11 @@ body {
   color: var(--color-foreground);
 }
 
+body,
+body * {
+  cursor: var(--pen-cursor);
+}
+
 body.template-index {
   background-color: var(--palette-matted-old-cream);
   color: var(--palette-matted-old-charcoal);

@@ -58,9 +58,11 @@
       "description": "Toutes vos fournitures scolaire en un seul endroit. En quelques cliques, depuis le confort de chez vous, offrez à votre enfant un souvenir, une marque d'affection, une rentrée scolaire et une année épanouie.",
       "navigation": "Catégories de la boutique",
       "countdown": "Compte à rebours jusqu'à la rentrée",
+      "countdown_caption": "Avant la rentrée",
       "days": "Jours",
       "hours": "Heures",
       "minutes": "Minutes",
+      "seconds": "Secondes",
       "services": {
         "online": {
           "title": "Achat en ligne",

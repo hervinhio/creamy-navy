@@ -11,13 +11,48 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs1" />
+     id="defs1">
+    <filter
+       id="inset-top-shadow"
+       x="-0.05"
+       y="-0.1"
+       width="1.1"
+       height="1.2"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         flood-color="#081b2b"
+         flood-opacity="0.95"
+         result="shadow-color" />
+      <feComposite
+         in="shadow-color"
+         in2="SourceAlpha"
+         operator="out"
+         result="outside" />
+      <feGaussianBlur
+         in="outside"
+         stdDeviation="2.2"
+         result="blurred" />
+      <feOffset
+         in="blurred"
+         dx="0"
+         dy="5"
+         result="offset" />
+      <feComposite
+         in="offset"
+         in2="SourceAlpha"
+         operator="in"
+         result="shadow" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode in="shadow" />
+      </feMerge>
+    </filter>
+  </defs>
   <g
-     id="layer1"
-     transform="translate(19.709466,-67.571649)">
+     id="layer1">
     <path
-       style="opacity:0.98;fill:#2f5982;fill-opacity:1;stroke:none;stroke-width:3.09901;stroke-miterlimit:0.5"
-       d="M 277.39155,154.17109 C 232.89113,131.53053 216.7266,185.95667 169.05164,137.07708 157.10615,124.82975 128.1595,122.48366 110.43916,110.3016 72.094055,83.940784 51.205375,69.022692 32.942445,68.149672 -0.71248507,66.54087 -9.8940251,68.030254 -19.211905,75.936344 c -0.97483,0.827132 -0.21666,153.772666 -0.21666,153.772666 l 296.997725,4e-5 z"
+       style="opacity:0.98;fill:#2f5982;fill-opacity:1;stroke:none;stroke-width:3.09901;stroke-miterlimit:0.5;filter:url(#inset-top-shadow)"
+       d="M 0,16 C 35,6 70,8 100,16 C 130,24 160,24 190,16 C 220,8 255,10 297.27863,18 L 297.27863,162.13742 L 0,162.13742 Z"
        id="path1" />
   </g>
 </svg>

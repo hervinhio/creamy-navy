@@ -11,6 +11,7 @@
   {% paginate collection.products by 12 %}
     <div class="collection-products" style="--product-columns: {{ collection.products.size | at_most: 4 }}">
     {% for product in collection.products %}
+      {% assign selected_variant = product.selected_or_first_available_variant %}
       <article class="collection-product">
         <a class="collection-product__media" href="{{ product.url }}">
           {% if product.featured_image %}
@@ -29,6 +30,20 @@
         <div class="collection-product__content">
           <h2>{{ product.title | escape | link_to: product.url }}</h2>
           <p class="collection-product__price">{{ product.price | money }}</p>
+
+          {% form 'product', product, class: 'collection-product__form' %}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button
+              class="collection-product__add-to-cart"
+              type="submit"
+              aria-label="{{ 'home.storefront.featured.add_to_cart' | t | escape }}"
+              title="{{ 'home.storefront.featured.add_to_cart' | t | escape }}"
+              {% unless selected_variant.available %}disabled{% endunless %}
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">add_shopping_cart</span>
+            </button>
+          {% endform %}
         </div>
       </article>
     {% endfor %}
@@ -44,10 +59,16 @@
 
 {% stylesheet %}
   .collection-page {
+    --palette-vintage-pastels-blue: #82d5fc;
+    --palette-vintage-pastels-pink: #fdd5cf;
+    --palette-vintage-pastels-green: #d8edc8;
+    --palette-vintage-pastels-ivory: #fffff0;
+    --palette-vintage-pastels-yellow: #ffd97d;
+
     min-height: calc(100svh - 7rem);
-    padding: clamp(2rem, 5vw, 4.5rem) 0;
-    background: var(--color-background);
-    color: var(--color-foreground);
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 3rem);
+    background: var(--palette-matted-old-cream);
+    color: var(--palette-matted-old-charcoal);
   }
 
   .collection-page__title {
@@ -61,26 +82,47 @@
     grid-template-columns: repeat(var(--product-columns), minmax(10rem, 13rem));
     justify-content: center;
     gap: clamp(2.5rem, 6vw, 6rem) clamp(1rem, 4vw, 4rem);
-    margin-top: clamp(5rem, 12vw, 8rem);
+    margin: clamp(5rem, 12vw, 8rem) auto 0;
   }
 
   .collection-product {
+    --note-rotation: -5deg;
+
     position: relative;
+    overflow: hidden;
     min-width: 0;
+    border-radius: 0.12rem;
+    background: var(--post-it-color, var(--palette-vintage-pastels-yellow));
+    box-shadow:
+      0 1px 1px rgb(68 68 68 / 18%),
+      0 5px 5px -3px rgb(68 68 68 / 28%),
+      0 18px 16px -12px rgb(68 68 68 / 48%);
     text-align: center;
-    transform-origin: center;
-    transition: transform 240ms ease;
+    transform: rotate(var(--note-rotation));
+    transform-origin: 50% 12%;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .collection-product:nth-child(4n + 2) {
+    --note-rotation: 3deg;
+  }
+
+  .collection-product:nth-child(4n + 3) {
+    --note-rotation: -2deg;
+  }
+
+  .collection-product:nth-child(4n) {
+    --note-rotation: 5deg;
   }
 
   .collection-product__media {
     display: grid;
     place-items: center;
-    width: 100%;
-    aspect-ratio: 1;
+    width: calc(100% - 1.4rem);
+    aspect-ratio: 1 / 0.9;
+    margin: 0.7rem 0.7rem 0;
     overflow: hidden;
-    border-radius: 50%;
-    background: #ffe58a;
-    transition: box-shadow 240ms ease;
+    background: var(--palette-matted-old-cream);
   }
 
   .collection-product__image {
@@ -90,7 +132,10 @@
   }
 
   .collection-product__content {
-    margin-top: 0.55rem;
+    position: relative;
+    min-height: 5.75rem;
+    padding: 1rem 3.4rem 1rem 0.85rem;
+    text-align: left;
   }
 
   .collection-product__content h2 {
@@ -105,9 +150,42 @@
   }
 
   .collection-product__price {
-    margin-top: 0.7rem;
+    margin-top: 0.5rem;
     font-size: 1rem;
-    opacity: 0.8;
+    font-weight: 700;
+  }
+
+  .collection-product__form {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .collection-product__add-to-cart {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    border: 1px solid var(--palette-matted-old-charcoal);
+    border-radius: 50%;
+    background: var(--palette-matted-old-charcoal);
+    color: var(--palette-matted-old-cream);
+    cursor: pointer;
+  }
+
+  .collection-product__add-to-cart:focus-visible {
+    outline: 3px solid var(--palette-matted-old-charcoal);
+    outline-offset: 3px;
+  }
+
+  .collection-product__add-to-cart:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .collection-product__add-to-cart .material-symbols-outlined {
+    font-size: 1.15rem;
   }
 
   .collection-pagination {
@@ -123,12 +201,11 @@
     .collection-product:hover,
     .collection-product:focus-within {
       z-index: 1;
-      transform: translateY(-0.5rem) scale(1.04);
-    }
-
-    .collection-product:hover .collection-product__media,
-    .collection-product:focus-within .collection-product__media {
-      box-shadow: 0 1.25rem 2rem rgb(0 0 0 / 18%);
+      box-shadow:
+        0 2px 2px rgb(68 68 68 / 18%),
+        0 8px 8px -3px rgb(68 68 68 / 30%),
+        0 24px 22px -14px rgb(68 68 68 / 52%);
+      transform: rotate(0) translateY(-0.5rem) scale(1.04);
     }
   }
 
@@ -139,7 +216,7 @@
 
     .collection-products {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2.5rem 1rem;
+      gap: 3rem 1.25rem;
       margin-top: 3.5rem;
     }
 
@@ -156,6 +233,21 @@
     }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  const vintagePastels = ['#82d5fc', '#fdd5cf', '#d8edc8', '#fffff0', '#ffd97d']
+  let availablePastels = [...vintagePastels]
+
+  document.querySelectorAll('.collection-product').forEach((product) => {
+    if (availablePastels.length === 0) {
+      availablePastels = [...vintagePastels]
+    }
+
+    const colorIndex = Math.floor(Math.random() * availablePastels.length)
+    const [color] = availablePastels.splice(colorIndex, 1)
+    product.style.setProperty('--post-it-color', color)
+  })
+{% endjavascript %}
 
 {% schema %}
 {

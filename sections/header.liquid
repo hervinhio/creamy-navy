@@ -15,13 +15,14 @@
     <input type="hidden" name="options[prefix]" value="last">
     <input type="hidden" name="type" value="product">
     <input
+      class="notebook-input"
       type="search"
       name="q"
       value="{{ search.terms | escape }}"
       placeholder="{{ 'search.placeholder' | t | escape }}"
       aria-label="{{ 'search.placeholder' | t | escape }}"
     >
-    <button type="submit" aria-label="{{ 'search.submit' | t | escape }}">
+    <button class="notebook-input-icon" type="submit" aria-label="{{ 'search.submit' | t | escape }}">
       <span class="material-symbols-outlined" aria-hidden="true">search</span>
     </button>
   </form>
@@ -92,18 +93,8 @@
     min-width: 0;
     height: 2.4rem;
     padding: 0.45rem 2.5rem 0.45rem 0.8rem;
-    border: 1px solid rgb(68 68 68 / 35%);
-    border-radius: 0.3rem;
-    outline: 0;
-    background: rgb(255 255 255 / 48%);
-    color: var(--palette-matted-old-charcoal);
     font-family: 'Autour One', cursive;
     font-size: 0.74rem;
-  }
-
-  header .header__search input[type='search']:focus-visible {
-    border-color: var(--palette-matted-old-blue);
-    box-shadow: 0 0 0 2px var(--palette-matted-old-blue);
   }
 
   header .header__search button {
@@ -117,7 +108,6 @@
     padding: 0;
     border: 0;
     background: transparent;
-    color: var(--palette-matted-old-charcoal);
     cursor: pointer;
   }
 

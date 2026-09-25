@@ -39,6 +39,30 @@ select {
   color: currentcolor;
 }
 
+.notebook-input {
+  max-width: 100%;
+  border: 0;
+  border-block: 1px solid var(--palette-matted-old-blue-light);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--palette-matted-old-blue-light);
+}
+
+.notebook-input::placeholder {
+  color: var(--palette-matted-old-blue-light);
+  opacity: 0.75;
+}
+
+.notebook-input:focus-visible {
+  border-block-color: var(--palette-matted-old-blue);
+  box-shadow: 0 1px 0 var(--palette-matted-old-blue), 0 -1px 0 var(--palette-matted-old-blue);
+}
+
+.notebook-input-icon {
+  color: var(--palette-matted-old-blue-light);
+}
+
 dialog {
   background-color: var(--color-background);
   color: var(--color-foreground);

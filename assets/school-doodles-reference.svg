@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 458 676" fill="none" stroke="#8f8f8f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-90 0 548 676" fill="none" stroke="#8f8f8f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
   <defs>
     <g id="notebook"><path d="M8 5h48v62H8zM16 5v62M22 22h27M22 33h23M22 49h27"/><path d="M3 15h10M3 27h10M3 39h10M3 51h10"/></g>
     <g id="pencil"><path d="M8 2h9l-2 55-6 12-4-13zM8 14h8M5 56h10"/></g>
@@ -6,6 +6,8 @@
     <g id="star"><path d="m14 1 4 9 10 1-8 7 3 10-9-5-9 5 2-10-7-7 10-1z"/></g>
     <g id="paperclip"><path d="M9 3C0 7 1 19 9 20l14-1c8-1 8-13 1-14L12 6c-5 0-5 7 0 7h10"/></g>
     <g id="paper"><path d="M5 3h51v64H5zM14 3v64M20 20h28M20 31h23M20 47h28M20 58h19"/></g>
+    <g id="backpack"><path d="M13 30C13 10 27 3 43 3s30 7 30 27v57H13zM22 31V20c0-9 8-14 21-14s21 5 21 14v11M13 42h60M25 55h36v20H25zM13 61H6v24h7M73 61h7v24h-7"/><path d="M39 63h8l-2 7h-8z"/></g>
+    <g id="calculator"><rect x="5" y="3" width="58" height="85" rx="7"/><rect x="13" y="12" width="42" height="16" rx="2"/><path d="M16 39h8v8h-8zM30 39h8v8h-8zM44 39h8v8h-8zM16 53h8v8h-8zM30 53h8v8h-8zM44 53h8v8h-8zM16 67h8v8h-8zM30 67h8v8h-8zM44 67h8v8h-8z"/><text x="23" y="24" fill="#8f8f8f" stroke="none" font-family="sans-serif" font-size="8">123</text></g>
   </defs>
 
   <g transform="translate(32 20) rotate(-8 34 38)"><use href="#notebook"/><rect x="22" y="21" width="25" height="15"/><use href="#heart" transform="translate(24 38) scale(.45)"/></g>
@@ -22,6 +24,7 @@
   <use href="#pencil" transform="translate(298 126) rotate(8)"/>
   <g transform="translate(357 112)"><circle cx="39" cy="36" r="31"/><path d="M18 17c10-7 15-2 23-6 9-5 17 2 20 10M9 40c10-4 14 5 22 4s7-11 16-10c7 1 7 9 16 11M33 65c3-6-1-12 5-17 4-3 10-1 13 3 2 5-4 10-2 16M39 67v18M24 85h30M17 90h44"/></g>
   <use href="#heart" transform="translate(434 146) scale(.65)"/>
+  <use href="#backpack" transform="translate(-54 128) rotate(-7) scale(.62)"/>
 
   <g transform="translate(12 223) rotate(-4)"><path d="M4 36h67v20H4zM10 18h64v18H10zM18 2h61v16H18zM18 18l5 18M53 36l-5 20M27 44h29M27 25h31M29 10h33"/></g>
   <g transform="translate(106 221) rotate(6)"><path d="M4 19 25 3h45L51 38H13zM25 3l20 17 25-17M45 20l6 18"/><text x="26" y="15" fill="#8f8f8f" stroke="none" font-family="sans-serif" font-size="7">ERASER</text></g>
@@ -29,8 +32,11 @@
   <g transform="translate(238 208) rotate(5)"><circle cx="18" cy="18" r="14"/><circle cx="46" cy="18" r="14"/><path d="m28 27 36 51M37 27 7 78M9 79c8-1 13-6 15-13M64 79c-8-1-13-6-15-13"/></g>
   <g transform="translate(324 220) rotate(8)"><path d="M6 8h58v51H6zM17 8V2h12v6M27 32c5-6 10 5 15 0M31 25h1M46 25h1"/></g>
   <g transform="translate(395 215)"><path d="M5 22h54v55H5zM11 22V5M21 22V1M31 22V8M41 22V0M51 22V5M11 5l3-5 3 5M21 1l3-5 3 5M31 8l3-5 3 5M41 0l3-5 3 5M51 5l3-5 3 5"/><use href="#heart" transform="translate(22 39) scale(.45)"/></g>
+  <use href="#calculator" transform="translate(-60 210) rotate(7) scale(.62)"/>
 
   <use href="#star" transform="translate(3 279) scale(.65)"/>
+  <use href="#notebook" transform="translate(-78 282) rotate(-8) scale(.68)"/>
+  <use href="#pencil" transform="translate(-18 292) rotate(12) scale(.62)"/>
   <g transform="translate(4 310) rotate(12)"><path d="M3 7h82v15H3zM15 7v7M28 7v4M41 7v7M54 7v4M67 7v7"/></g>
   <use href="#heart" transform="translate(2 350) scale(.6)"/>
   <path d="M5 378c7-10 12 8 19-2s13 8 20-2"/>
@@ -46,12 +52,15 @@
   <g transform="translate(275 383) rotate(8)"><circle cx="31" cy="31" r="24"/><circle cx="31" cy="31" r="17"/><path d="m49 49 23 27-9 8-23-28"/></g>
   <g transform="translate(362 386) rotate(7)"><path d="M4 12h73v57H4zM4 12h30l8-8h35v65M12 24h57"/></g>
   <use href="#heart" transform="translate(434 423) scale(.65)"/>
+  <use href="#backpack" transform="translate(-56 368) rotate(6) scale(.64)"/>
 
   <g transform="translate(14 477) rotate(-2)"><path d="M5 10h66v54H5zM14 10V2M27 10V2M40 10V2M53 10V2M66 10V2M14 28h48M14 41h48"/></g>
   <g transform="translate(111 487) rotate(-5)"><circle cx="18" cy="18" r="13"/><circle cx="51" cy="18" r="13"/><path d="M31 17h7M5 15-4 11M64 15l12-8"/></g>
   <g transform="translate(188 468)"><path d="M6 9h77v58H6zM12 16h65v43H12zM44 67v19M27 86h34"/><text x="27" y="44" fill="#8f8f8f" stroke="none" font-family="sans-serif" font-size="16">ABC</text></g>
   <path d="m320 483 3 8 8 3-8 3-3 9-3-9-8-3 8-3z"/>
   <g transform="translate(369 483) rotate(10)"><path d="M5 9h58v46H5zM5 9h43l15 12M13 46h42"/></g>
+  <use href="#calculator" transform="translate(-24 458) rotate(-6) scale(.58)"/>
+  <use href="#paperclip" transform="translate(22 485) rotate(9) scale(.8)"/>
 
   <g transform="translate(22 548)"><path d="M6 2h26v53L19 43 6 55z"/><use href="#heart" transform="translate(10 11) scale(.45)"/></g>
   <use href="#pencil" transform="translate(91 546) rotate(13)"/>

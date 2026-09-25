@@ -1,8 +1,8 @@
 {
   "404": {
     "title": "404",
-    "not_found": "Page not found.",
-    "back_to_shopping": "Back to shopping"
+    "not_found": "Page non trouvée",
+    "back_home": "Retourner à la page d'acceuil"
   },
   "blog": {
     "article_comments": "Comments",
@@ -15,6 +15,9 @@
   },
   "cart": {
     "checkout": "Checkout",
+    "decrease_quantity": "Decrease quantity",
+    "increase_quantity": "Increase quantity",
+    "quantity": "Quantity",
     "title": "Cart",
     "update": "Update",
     "remove": "Remove"

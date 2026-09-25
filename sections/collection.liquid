@@ -35,7 +35,7 @@
             <input type="hidden" name="id" value="{{ selected_variant.id }}">
             <input type="hidden" name="quantity" value="1">
             <button
-              class="collection-product__add-to-cart"
+              class="collection-product__add-to-cart button--secondary"
               type="submit"
               aria-label="{{ 'home.storefront.featured.add_to_cart' | t | escape }}"
               title="{{ 'home.storefront.featured.add_to_cart' | t | escape }}"
@@ -167,15 +167,13 @@
     width: 2.4rem;
     height: 2.4rem;
     padding: 0;
-    border: 1px solid var(--palette-matted-old-charcoal);
+    border: 0;
     border-radius: 50%;
-    background: var(--palette-matted-old-charcoal);
-    color: var(--palette-matted-old-cream);
     cursor: pointer;
   }
 
   .collection-product__add-to-cart:focus-visible {
-    outline: 3px solid var(--palette-matted-old-charcoal);
+    outline: 3px solid var(--palette-matted-old-crimson);
     outline-offset: 3px;
   }
 

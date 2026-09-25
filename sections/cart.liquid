@@ -7,27 +7,215 @@
 
 <h1>{{ 'cart.title' | t }}</h1>
 
-<form action="{{ routes.cart_url }}" method="post">
-  <table>
+<form class="cart-form" action="{{ routes.cart_url }}" method="post">
+  <div class="cart-items">
     {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input class="notebook-input" type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
+      <div class="cart-item">
+        <div class="cart-item__image">
+          {% render 'image', image: item.image, url: item.url, width: 328 %}
+        </div>
 
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
+        <div class="cart-item__details">
+          <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+
+          {% if item.product.description != blank %}
+            <div class="cart-item__description">
+              {{ item.product.description }}
+            </div>
+          {% endif %}
+
+          <div class="cart-item__controls">
+            <a class="button-link" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+            <input type="submit" value="{{ 'cart.update' | t }}">
+            <quantity-stepper class="quantity-stepper">
+              <button
+                class="quantity-stepper__button"
+                type="button"
+                data-quantity-change="1"
+                aria-label="{{ 'cart.increase_quantity' | t | escape }}"
+              >
+                +
+              </button>
+              <input
+                class="quantity-stepper__input"
+                type="text"
+                name="updates[]"
+                value="{{ item.quantity }}"
+                inputmode="none"
+                aria-label="{{ 'cart.quantity' | t | escape }}"
+                data-quantity-input
+                readonly
+              >
+              <button
+                class="quantity-stepper__button"
+                type="button"
+                data-quantity-change="-1"
+                aria-label="{{ 'cart.decrease_quantity' | t | escape }}"
+              >
+                -
+              </button>
+            </quantity-stepper>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <input class="button--secondary" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
 </form>
+
+{% stylesheet %}
+  .cart-form,
+  .cart-items,
+  .cart-item__details {
+    display: grid;
+  }
+
+  .cart-form {
+    gap: 2rem;
+    padding-block: 1rem 3rem;
+  }
+
+  .cart-items {
+    gap: 1.5rem;
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: minmax(0, 164px) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  .cart-item__image {
+    width: 100%;
+    max-width: 164px;
+  }
+
+  .cart-item__details {
+    justify-items: start;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+
+  .cart-item__title {
+    color: currentcolor;
+    font-family: 'Autour One', cursive;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .cart-item__description {
+    max-width: 65ch;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .cart-item__controls {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .quantity-stepper {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: hidden;
+    width: 72px;
+    height: 24px;
+    border: 1px solid var(--button-color-primary);
+    border-radius: 999px;
+  }
+
+  .quantity-stepper__button,
+  .quantity-stepper__input {
+    width: 100%;
+    min-width: 0;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--button-color-primary);
+    line-height: 1;
+    text-align: center;
+  }
+
+  .quantity-stepper__button:hover:not(:disabled) {
+    background: var(--button-color-primary);
+    color: var(--palette-matted-old-cream);
+  }
+
+  .quantity-stepper__button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .quantity-stepper__input:focus {
+    outline: 0;
+  }
+
+  .cart-item__controls :is(.button-link, input[type='submit']) {
+    font-size: 0.75rem;
+  }
+
+  .cart-item__controls input[type='submit'] {
+    height: 24px;
+    padding-inline: 0.5rem;
+  }
+
+  .cart-form > input[type='submit'] {
+    justify-self: start;
+    min-height: 2.4rem;
+    padding-inline: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    .cart-item {
+      grid-template-columns: minmax(0, 96px) minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class QuantityStepper extends HTMLElement {
+    connectedCallback() {
+      this.input = this.querySelector('[data-quantity-input]');
+      this.addEventListener('click', this.handleClick);
+      this.updateButtons();
+    }
+
+    disconnectedCallback() {
+      this.removeEventListener('click', this.handleClick);
+    }
+
+    handleClick = (event) => {
+      const button = event.target.closest('[data-quantity-change]');
+
+      if (!button || !this.contains(button)) return;
+
+      const change = Number(button.dataset.quantityChange);
+      const quantity = Math.max(0, Number(this.input.value) + change);
+
+      this.input.value = quantity;
+      this.input.dispatchEvent(new Event('change', { bubbles: true }));
+      this.updateButtons();
+    };
+
+    updateButtons() {
+      const decreaseButton = this.querySelector('[data-quantity-change="-1"]');
+      decreaseButton.disabled = Number(this.input.value) === 0;
+    }
+  }
+
+  if (!customElements.get('quantity-stepper')) {
+    customElements.define('quantity-stepper', QuantityStepper);
+  }
+{% endjavascript %}
 
 {% schema %}
 {

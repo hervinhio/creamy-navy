@@ -193,7 +193,7 @@
                 {% form 'product', product, class: 'home-product__form' %}
                   <input type="hidden" name="id" value="{{ selected_variant.id }}">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" {% unless selected_variant.available %}disabled{% endunless %}>
+                  <button class="button--secondary" type="submit" {% unless selected_variant.available %}disabled{% endunless %}>
                     {% if selected_variant.available %}
                       <span class="material-symbols-outlined" aria-hidden="true">add_shopping_cart</span>
                       {{ 'home.storefront.featured.add_to_cart' | t }}
@@ -966,15 +966,18 @@
     gap: 0.4rem;
     min-height: 2.65rem;
     padding: 0.65rem 1rem;
-    border: 1px solid #ddc173;
+    border: 0;
     border-radius: 0.3rem;
-    background: transparent;
     color: var(--palette-matted-old-cream);
     font: inherit;
     font-size: 0.72rem;
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .home-product__options {
+    background: transparent;
   }
 
   .home-product__form button:disabled {

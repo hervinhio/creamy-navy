@@ -5,41 +5,124 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
+<section class="product-page">
+  <div class="product-images">
+    {% for image in product.images %}
+      {% render 'image', class: 'product-image', image: image, width: 1000 %}
+    {% endfor %}
+  </div>
 
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
+  <div class="product-details">
+    <div class="product-info">
+      <h1>{{ product.title }}</h1>
+      <p>{{ product.price | money }}</p>
+      <p>{{ product.description }}</p>
+    </div>
 
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
+    <div class="product-form">
+      {% form 'product', product %}
+        {% assign current_variant = product.selected_or_first_available_variant %}
 
-    <select class="notebook-input" name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
+        <div class="product-form__controls">
+          <select class="notebook-input" name="id">
+            {% for variant in product.variants %}
+              <option
+                value="{{ variant.id }}"
+                {% if variant == current_variant %}
+                  selected="selected"
+                {% endif %}
+              >
+                {{ variant.title }} - {{ variant.price | money }}
+              </option>
+            {% endfor %}
+          </select>
 
-    <input class="notebook-input" type="text" name="quantity" min="1" value="1">
+          <input class="notebook-input" type="number" name="quantity" min="1" value="1">
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
-</div>
+          <input class="button--secondary" type="submit" value="Add to cart">
+        </div>
+
+        {{ form | payment_button }}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .product-page {
+    display: grid;
+    justify-content: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 3rem);
+  }
+
+  .product-images {
+    display: grid;
+    gap: 1rem;
+    width: min(100%, 500px);
+    margin-inline: auto;
+  }
+
+  .product-image {
+    max-width: 500px;
+  }
+
+  .product-details {
+    display: grid;
+    align-content: start;
+    gap: 2rem;
+    min-width: 0;
+  }
+
+  .product-form form {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .product-form__controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 4.5rem auto;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .product-form__controls :is(select, input) {
+    min-width: 0;
+    height: 2.4rem;
+  }
+
+  .product-form__controls input[type='submit'] {
+    padding-inline: 1rem;
+  }
+
+  .product-form .shopify-payment-button {
+    width: 100%;
+  }
+
+  .product-form shopify-accelerated-checkout {
+    --shopify-accelerated-checkout-button-block-size: 2.4rem;
+    --shopify-accelerated-checkout-button-border-radius: var(--style-border-radius-inputs);
+  }
+
+  .product-form .shopify-payment-button__button--unbranded {
+    background-color: var(--palette-matted-old-blue) !important;
+    color: var(--palette-matted-old-cream) !important;
+    border: 0 !important;
+    transition: none !important;
+  }
+
+  .product-form .shopify-payment-button__button--unbranded:hover {
+    background: var(--palette-matted-old-yellow) !important;
+    color: var(--palette-matted-old-charcoal) !important;
+  }
+
+  @media (orientation: landscape) {
+    .product-page {
+      grid-template-columns: minmax(0, 500px) minmax(16rem, 1fr);
+      align-items: start;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
